@@ -11,10 +11,10 @@ function atualizarTabelaGrafoMatriz(grafoMatriz, idTabelaMatriz) {
 function atualizarCabecalho(grafoMatriz, idTabelaMatriz) {
     var cabecalho = $(idTabelaMatriz + ' thead tr');
 
-    var html = '<th>#</th>';
+    var html = '<th class="text-center">#</th>';
 
     for (var i = 0; i < grafoMatriz.matriz.length; i++) {
-        html += '<th>' + i + '</th>';
+        html += '<th class="text-center">' + i + '</th>';
     }
 
     cabecalho.html(html);

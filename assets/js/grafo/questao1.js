@@ -96,28 +96,34 @@ function getGrafoListaAdjacenciaQuestao1() {
     return grafo;
 }
 
-function getGrafoEscolhido(escolhaGrafo) {
-    switch (escolhaGrafo) {
-        case 'grafoGMatriz':
-            return {grafo: grafoMatriz,
-                texto: 'grafo G'};
-        case 'grafoHMatriz':
-            return {grafo: grafoMatrizCompleto,
-                texto: 'grafo H (Completo)'};
-        case 'grafoGLista':
-            return {grafo: grafoListaAdjacencia,
-                texto: 'grafo G'};
-        case 'grafoHLista':
-            return {grafo: grafoListaAdjacenciaCompleto,
-                texto: 'grafo H (Completo)'};
-        default:
-            console.log("Erro em escolha de grafo!");
-            return undefined;
+function getGrafoEscolhido(escolhaGrafo, escolhaImplementacao) {
+    if (escolhaGrafo == 'grafoG' && escolhaImplementacao == 'matriz'){
+        return {grafo: grafoMatriz,
+            texto: 'grafo G'};
+    } else if (escolhaGrafo == 'grafoG' && escolhaImplementacao == 'lista') {
+        return {grafo: grafoListaAdjacencia,
+            texto: 'grafo G'};
+    } else if (escolhaGrafo == 'grafoH' && escolhaImplementacao == 'matriz') {
+        return {grafo: grafoMatrizCompleto,
+            texto: 'grafo H (Completo)'};
+    } else if (escolhaGrafo == 'grafoH' && escolhaImplementacao == 'lista') {
+        return {grafo: grafoListaAdjacenciaCompleto,
+            texto: 'grafo H (Completo)'};
+    } else {
+        console.log("Erro em escolha de grafo!");
+        return undefined;
     }
 }
 
-function existeAresta(verticeSaida, verticeChegada, mensagem, escolhaGrafo) {
-    var grafoEscolhido = getGrafoEscolhido(escolhaGrafo);
+function existeAresta() {
+    var verticeSaida = $('#verticeSaida').val();
+    var verticeChegada = $('#verticeEntrada').val();
+    var escolhaGrafo = $('input[name=\'escolhaGrafo\']:checked').val();
+    var escolhaImplementacao = $('input[name=\'escolhaImplementacao\']:checked').val();
+    
+    var mensagem = $('#mensagem');
+
+    var grafoEscolhido = getGrafoEscolhido(escolhaGrafo, escolhaImplementacao);
 
     var inicio = performance.now();
 
@@ -125,15 +131,19 @@ function existeAresta(verticeSaida, verticeChegada, mensagem, escolhaGrafo) {
 
     var fim = performance.now();
 
+    var html;
+
     if (testeExisteAresta) {
-        mensagem.html("A aresta (" + verticeSaida + ', ' + verticeChegada + ') existe no ' + grafoEscolhido.texto + '.');
+        html = "A aresta (" + verticeSaida + ', ' + verticeChegada + ') existe no ' + grafoEscolhido.texto + '.';
         mensagem.removeClass("alert-danger");
         mensagem.addClass("alert-success");
     } else {
-        mensagem.html('A aresta (' + verticeSaida + ', ' + verticeChegada + ') não existe no ' + grafoEscolhido.texto + '.');
+        html = 'A aresta (' + verticeSaida + ', ' + verticeChegada + ') não existe no ' + grafoEscolhido.texto + '.';
         mensagem.removeClass("alert-success");
         mensagem.addClass("alert-danger");
     }
+
+    mensagem.html('<strong>' + html + '</strong>');
 
     mensagem.removeClass('hidden');
 }
@@ -226,17 +236,15 @@ $(function() {
     grafoMatrizCompleto = grafoMatriz.getGrafoCompleto();
     grafoListaAdjacenciaCompleto = grafoListaAdjacencia.getGrafoCompleto();
 
-    grafoMatriz.atualizarSelect('#verticeSaidaExisteArestaMatriz');
-    grafoMatriz.atualizarSelect('#verticeChegadaExisteArestaMatriz');
-    grafoMatriz.atualizarSelect('#inputVerticeAdjacenteMatriz');
+    grafoMatriz.atualizarSelect('#verticeSaida');
+    grafoMatriz.atualizarSelect('#verticeEntrada');
 
-    grafoListaAdjacencia.atualizarSelect('#verticeSaidaExisteArestaLista');
-    grafoListaAdjacencia.atualizarSelect('#verticeChegadaExisteArestaLista');
-    grafoListaAdjacencia.atualizarSelect('#inputVerticeAdjacenteLista');
+    atualizarTabelaGrafoMatriz(grafoMatriz, "#tabelaMatrizAdjacenciaGrafoG");
+    atualizarTabelaGrafoMatriz(grafoMatrizCompleto, "#tabelaMatrizAdjacenciaGrafoH");
 
-    atualizarTabelaGrafoMatriz(grafoMatriz, "#tabelaMatrizAdjacencia");
-    grafoListaAdjacencia.printListaAdjacencia('#tabelaListaAdjacencia');
+    grafoListaAdjacencia.printListaAdjacencia('#tabelaListaAdjacenciaGrafoG');
+    grafoListaAdjacenciaCompleto.printListaAdjacencia('#tabelaListaAdjacenciaGrafoH');
 
-    atualizarTabelaProcessamento('#tabelaProcessamentoMatriz', REPRESENTACAO_MATRIZ);
-    atualizarTabelaProcessamento('#tabelaProcessamentoLista', REPRESENTACAO_LISTA);
+    /*atualizarTabelaProcessamento('#tabelaProcessamentoMatriz', REPRESENTACAO_MATRIZ);
+    atualizarTabelaProcessamento('#tabelaProcessamentoLista', REPRESENTACAO_LISTA);*/
 });

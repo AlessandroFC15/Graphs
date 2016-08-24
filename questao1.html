@@ -30,6 +30,9 @@
     <link href="bootstrap3/css/font-awesome.css" rel="stylesheet">
     <link href='http://fonts.googleapis.com/css?family=Grand+Hotel' rel='stylesheet' type='text/css'>
 
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.11.0/css/bootstrap-select.min.css">
+
     <style>
         body {
           padding-top: 40px;
@@ -55,7 +58,13 @@
         }
 
     </style>
-  
+
+    <style>
+        .dark-label {
+            color: #6D6D6D!important;
+        }
+
+    </style>
 </head>
 
 <body>
@@ -202,11 +211,13 @@
             <span class="keyword">this</span>.<span class="instance_member_variable">matriz</span>[verticeSaida][verticeChegada] != 0;
 };</pre>
 
+
+                                        <button class="btn btn-raised btn-sm" type="button" data-toggle="modal" data-target="#dialogRepresentacaoMatriz">
+                                            <span class="glyphicon glyphicon-th-large"></span> Representação do Grafo em Matriz
+                                        </button>
+
                                         <button class="btn btn-raised btn-sm" type="button" data-toggle="collapse" data-target="#comentariosMatriz" aria-expanded="false" aria-controls="comentariosMatriz">
                                             <span class="glyphicon glyphicon-pencil"></span> Comentários
-                                        </button>
-                                        <button class="btn btn-raised btn-sm" type="button" data-toggle="modal" data-target="#my">
-                                            <span class="glyphicon glyphicon-th-large"></span> Representação do Grafo em Matriz
                                         </button>
 
                                         <div class="collapse" id="comentariosMatriz">
@@ -227,11 +238,11 @@
         <span class="keyword">this</span>.<span class="instance_member_variable">lista</span>[verticeSaida].<span class="instance_member_function">indexOf</span>(Number(verticeChegada)) != -1;
 };</pre>
 
+                                        <button class="btn btn-raised btn-sm" type="button" data-toggle="modal" data-target="#dialogRepresentacaoLista">
+                                            <span class="glyphicon glyphicon-th-large"></span> Representação do Grafo em Lista de Adjacência
+                                        </button>
                                         <button class="btn btn-raised btn-sm" type="button" data-toggle="collapse" data-target="#comentariosLista" aria-expanded="false" aria-controls="comentariosLista">
                                             <span class="glyphicon glyphicon-pencil"></span> Comentários
-                                        </button>
-                                        <button class="btn btn-raised btn-sm" type="button" data-toggle="modal" data-target="#my">
-                                            <span class="glyphicon glyphicon-th-large"></span> Representação do Grafo em Lista de Adjacência
                                         </button>
 
                                         <div class="collapse" id="comentariosLista">
@@ -257,17 +268,83 @@
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2">
                 <div class="card">
-				
-					
-					 
                     <div class="card-body">
                         <h3><span class="glyphicon glyphicon-console"></span> <span>Execução</span></h3>
 
-                        <br>
+                        <form class="form-group" onsubmit="existeAresta(); return false;">
+
+                            <div class="form-group form-group-lg">
+                                <label for="verticeSaida" class="col-md-3 control-label">Vértice de Saída</label>
+
+                                <div class="col-md-1 text-center">
+                                    <select id="verticeSaida" class="form-control" style="padding: 0 0 0 8px;">
+
+                                    </select>
+                                </div>
+                            </div>
+
+                            <br>
+
+                            <div class="form-group form-group-lg">
+                                <label for="verticeEntrada" class="col-md-3 control-label">Vértice de Entrada</label>
+
+                                <div class="col-md-1 text-center">
+                                    <select id="verticeEntrada" class="form-control" style="padding: 0 0 0 8px;">
+
+                                    </select>
+                                </div>
+                            </div>
+
+                            <br>
+                            <br>
+
+                            <br>
+
+                            <label class="dark-label">Grafo a ser analisado</label>
+
+                            <div class="form-group">
+                                <label class="radio-inline">
+                                    <input type="radio" name="escolhaGrafo" id="grafoGExisteAresta" value="grafoG" checked=""> Grafo G
+                                </label>
+                                <label class="radio-inline">
+                                    <input type="radio" name="escolhaGrafo" id="grafoHExisteAresta" value="grafoH"> Grafo H (Completo)
+                                </label>
+                            </div>
+
+                            <br>
+
+                            <label class="dark-label">Tipo de Implementação</label>
+
+                            <div class="form-group">
+                                <label class="radio-inline">
+                                    <input type="radio" name="escolhaImplementacao" id="matriz" value="matriz" checked=""> Matriz
+                                </label>
+                                <label class="radio-inline">
+                                    <input type="radio" name="escolhaImplementacao" id="lista" value="lista"> Lista
+                                </label>
+                            </div>
+
+                            <br>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <button type="submit" class="btn btn-primary">Existe Aresta?</button>
+
+                                </div>
+
+
+                            </div>
+
+                            <br>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="alert hidden text-center" id="mensagem"></div>
+                                </div>
+                            </div>
+                        </form>
+
                     </div>
                 </div>
             </div>
-
         </div>
         <br>
         <br>
@@ -294,19 +371,97 @@
     </div>
 
     <!--Modal dialog de representação de matriz-->
-    <div class="modal fade" id="my" tabindex="-1" role="dialog">
+    <div class="modal fade" id="dialogRepresentacaoMatriz" tabindex="-1" role="dialog">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                    <h4 class="modal-title">Modal title</h4>
+                    <h4 class="modal-title">Representação do Grafo em Matriz de Adjacência</h4>
                 </div>
                 <div class="modal-body">
-                    <p>One fine body…</p>
+                    <ul class="nav nav-pills">
+                        <li role="presentation" class="active"><a href="#representacaoMatrizGrafoG" aria-controls="representacaoMatrizGrafoG" role="tab" data-toggle="tab">Grafo G</a></li>
+                        <li role="presentation"><a href="#representacaoMatrizGrafoH" aria-controls="representacaoMatrizGrafoH" role="tab" data-toggle="tab">Grafo H (Completo)</a></li>
+
+                    </ul>
+
+                    <br>
+
+                    <div class="tab-content">
+                        <div role="tabpanel" class="tab-pane fade in active" id = "representacaoMatrizGrafoG">
+                            <table class="table table-striped text-center" id="tabelaMatrizAdjacenciaGrafoG">
+                                <thead>
+                                <tr>
+
+                                </tr>
+                                </thead>
+
+                                <tbody></tbody>
+
+                            </table>
+                        </div>
+                        <div role="tabpanel" class="tab-pane fade" id = "representacaoMatrizGrafoH">
+                            <table class="table table-striped text-center" id="tabelaMatrizAdjacenciaGrafoH">
+                                <thead>
+                                <tr>
+
+                                </tr>
+                                </thead>
+
+                                <tbody></tbody>
+
+                            </table>
+                        </div>
+                    </div>
+
+
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close<div class="ripple-container"></div></button>
-                    <button type="button" class="btn btn-primary">Save changes<div class="ripple-container"></div></button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Fechar<div class="ripple-container"></div></button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--Modal dialog de representação de lista de adjacência-->
+    <div class="modal fade" id="dialogRepresentacaoLista" tabindex="-1" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h4 class="modal-title">Representação do Grafo em Lista</h4>
+                </div>
+                <div class="modal-body">
+                    <ul class="nav nav-pills">
+                        <li role="presentation" class="active"><a href="#representacaoListaGrafoG" aria-controls="representacaoListaGrafoG" role="tab" data-toggle="tab">Grafo G</a></li>
+                        <li role="presentation"><a href="#representacaoListaGrafoH" aria-controls="representacaoListaGrafoH" role="tab" data-toggle="tab">Grafo H (Completo)</a></li>
+                    </ul>
+
+                    <br>
+
+                    <div class="tab-content">
+                        <div role="tabpanel" class="tab-pane fade in active" id = "representacaoListaGrafoG">
+                            <table class="table table-striped text-center" id="tabelaListaAdjacenciaGrafoG">
+                                <thead>
+                                <tr>
+
+                                </tr>
+                                </thead>
+
+                                <tbody></tbody>
+
+                            </table>
+                        </div>
+                        <div role="tabpanel" class="tab-pane fade" id = "representacaoListaGrafoH">
+                            <table class="table table-striped text-center" id="tabelaListaAdjacenciaGrafoH">
+                                <tbody></tbody>
+
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Fechar<div class="ripple-container"></div></button>
                 </div>
             </div>
         </div>
@@ -322,9 +477,22 @@
 <script src="assets/js/material-design/ripples.min.js"></script>
 
 
+<script src="assets/js/grafo/mainGrafo.js"></script>
 <script src="assets/js/grafo/grafoMatriz.js"></script>
 <script src="assets/js/grafo/grafoLista.js"></script>
+<script src="assets/js/grafo/questao1.js"></script>
 
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.11.0/js/bootstrap-select.min.js"></script>
+
+
+<script>
+    $(function () {
+        $(".select").dropdown({ "autoinit" : ".select" });
+    });
+
+
+</script>
 
 <script>
     $(function () {
