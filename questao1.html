@@ -380,9 +380,22 @@
                 </div>
             </div>
         </div>
+
     </div>
 
+    <br>
+
     <div class="container">
+        <br>
+
+        <div class="row">
+            <div class="col-md-4 col-md-offset-4 text-center">
+                <a href="javascript:void(0)" class="btn btn-primary btn-fab" data-toggle="tooltip" data-placement="left" title="Home" ><i class="material-icons">arrow_backward</i></a>
+                <a href="javascript:void(0)" class="btn btn-primary btn-fab" data-toggle="tooltip" data-placement="right" title="2ª Questão" ><i class="material-icons">arrow_forward</i></a>
+            </div>
+        </div>
+
+
         <hr>
 
         <footer>
@@ -505,6 +518,7 @@
 <script>
     $(function () {
         $.material.init();
+        $('[data-toggle="tooltip"]').tooltip();
     });
 </script>
 </html>
