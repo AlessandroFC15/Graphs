@@ -354,7 +354,27 @@
                 <div class="card">
                     <div class="card-body">
                         <h3><span class="glyphicon glyphicon-comment"></span><!--<i class="material-icons">&#xE87C;</i>--><span style="vertical-align: 3px">  Discussão</span></h3>
+                        <p><em>É possível perceber alguma diferença entre o tempo que o procedimento leva para encontrar
+                            arestas em H quando se compara matriz e lista? Explique.</em></p>
 
+                        <p>Através de diversas execuções do algoritmo acima, podemos perceber que não existe uma diferença significativa
+                        na performance do procedimento acima comparando a implementação por lista e a implementação por matriz de adjacência.</p>
+
+                        <p>Tal análise não deve ser uma surpresa, visto que os métodos de cada implementação são bem semelhantes,
+                        baseando-se em 2 testes, um para checar a validade dos dados de entrada e outro para realmente testar a
+                        presença ou não da aresta. É válido ressaltar enquanto a verificação da existência da aresta
+                        na matriz é direta, isto é, verificar se um valor corresponde a 0 ou não, no caso da implementação por lista,
+                        é necessário uma função auxiliar.</p>
+
+                        <p>O método auxiliar é o indexOf, que no caso da implementação acima tem como função procurar a
+                            existência do vértice de chegada dentro da lista de vértices adjacentes do vértice de saída. Tal procedimento é obviamente
+                        mais custoso do que um simples teste, como ocorre no procedimento do grafo matriz. </p>
+
+                        <p>Para o nosso caso, onde o número de vértices não é elevado, tal diferença entre a performance dos procedimentos não
+                        foi significativa. No entanto, caso o número de vértices seja bem mais elevado, é de se esperar que a implementação
+                        por matriz seja mais eficiente, levando em conta o seu acesso direto.</p>
+
+                        <h4 class="text-center">Tabela Zica de Performance</h4>
                         <br>
                     </div>
                 </div>
@@ -481,18 +501,6 @@
 <script src="assets/js/grafo/grafoMatriz.js"></script>
 <script src="assets/js/grafo/grafoLista.js"></script>
 <script src="assets/js/grafo/questao1.js"></script>
-
-<!-- Latest compiled and minified JavaScript -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.11.0/js/bootstrap-select.min.js"></script>
-
-
-<script>
-    $(function () {
-        $(".select").dropdown({ "autoinit" : ".select" });
-    });
-
-
-</script>
 
 <script>
     $(function () {

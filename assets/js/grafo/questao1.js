@@ -125,11 +125,11 @@ function existeAresta() {
 
     var grafoEscolhido = getGrafoEscolhido(escolhaGrafo, escolhaImplementacao);
 
-    var inicio = performance.now();
-
     var testeExisteAresta = grafoEscolhido.grafo.existeAresta(verticeSaida, verticeChegada);
 
-    var fim = performance.now();
+    var performance = getPerformanceTime(function() {
+        grafoEscolhido.grafo.existeAresta(verticeSaida, verticeChegada);
+    }, 5);
 
     var html;
 
@@ -142,6 +142,8 @@ function existeAresta() {
         mensagem.removeClass("alert-success");
         mensagem.addClass("alert-danger");
     }
+
+    html += '<br>Performance: ' + (performance) + 's';
 
     mensagem.html('<strong>' + html + '</strong>');
 
@@ -213,13 +215,13 @@ function getRowTabelaProcessamento(grafo, grafoCompleto, vertice) {
             '</tr>'
 }
 
-function getPerformanceTime(grafo, vertice, iterations) {
+function getPerformanceTime(method, iterations) {
     var totalTime = 0;
 
     for (var i = 0; i < iterations; i++) {
         var inicio = performance.now();
 
-        grafo.getVerticesAdjacentes(vertice);
+        method();
 
         var fim = performance.now();
 
