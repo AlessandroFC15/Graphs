@@ -65,7 +65,26 @@
         }
 
     </style>
-</head>
+
+	<!--  Overwriting bootstrap -->
+	<style>
+		.label.label-success {
+			color: #272727;
+			background-color: #dff0d8;
+		}
+		
+		.label.label-danger {
+			color: #272727;
+			background-color: #f2dede;
+		}
+		
+		.label.label-info {
+			color: #272727;
+			background-color: #d9edf7;;
+		}
+	</style>
+	
+	</head>
 
 <body>
     <nav class="navbar navbar-primary navbar-fixed-top">
@@ -374,24 +393,34 @@
                         foi significativa. No entanto, caso o número de vértices seja bem mais elevado, é de se esperar que a implementação
                         por matriz seja mais eficiente, levando em conta o seu acesso direto.</p>
 
-                        <h4 class="text-center">Tabela Zica de Performance</h4>
+                        <h3 class="text-center">Comparação de Performance</h3>
 						
 						<div class="col-md-8 col-md-offset-2 text-center">
-							<table class='table table-hover' id="tabelaPerformance">
+							<table class='table table-hover text-center' id="tabelaPerformance">
 								<thead>
 									<th class="text-center">Matriz</th>
 									<th class="text-center">Lista</th>
+									<th class="text-center">Diferença</th>
+									<th class="text-center">Aresta</th>
 								</thead>
 								
 								<tbody>
 									
 								</tbody>
 							</table>
+							
+							
+						
+							<span class="label label-success">Mais Rápido</span>
+							<span class="label label-danger">Mais Lento</span>
+							<span class="label label-info">Performance Semelhante</span>
+							<br>
+							<br>
+							
+							<i class="material-icons" onclick="atualizarTabelaPerformance()" style="cursor: pointer;" data-toggle="tooltip" data-placement="bottom" title="Gerar arestas aleatórias">refresh</i>
+							<br>
+							
 						</div>
-						
-						
-						
-                        <br>
                     </div>
                 </div>
             </div>

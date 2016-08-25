@@ -236,6 +236,8 @@ function getPerformanceTime(method, iterations) {
 		return returnValue;
 }
 
+const DIGITS_FLOAT = 6;
+
 function atualizarTabelaPerformance() {
 	var tabelaBody = $('#tabelaPerformance tbody');
 	
@@ -245,8 +247,31 @@ function atualizarTabelaPerformance() {
 		var verticeSaida = getRandomInt(0, 7);
 		var verticeChegada = getRandomInt(0, 7);
 		
-		html += '<tr><td>' + getPerformanceTime(function () { grafoMatrizCompleto.existeAresta(verticeSaida, verticeChegada); }, iterations).toFixed(6) + '</td>';
-		html += '<td>' + getPerformanceTime(function () { grafoListaAdjacenciaCompleto.existeAresta(verticeSaida, verticeChegada); }, iterations).toFixed(6) + '</td></tr>';
+		html += '<tr>';
+		
+		var performanceMatriz = getPerformanceTime(function () { grafoMatrizCompleto.existeAresta(verticeSaida, verticeChegada); }, iterations);
+		var performanceLista = getPerformanceTime(function () { grafoListaAdjacenciaCompleto.existeAresta(verticeSaida, verticeChegada); }, iterations);
+		
+		if (Math.abs(performanceMatriz - performanceLista).toFixed(DIGITS_FLOAT) != '0.000000') {
+			if (performanceMatriz > performanceLista) {
+			html += '<td class="danger">' + performanceMatriz.toFixed(DIGITS_FLOAT) + '</td>';
+			html += '<td class="success">' + performanceLista.toFixed(DIGITS_FLOAT) + '</td>';
+			} else if (performanceMatriz < performanceLista){
+				html += '<td class="success">' + performanceMatriz.toFixed(DIGITS_FLOAT) + '</td>';
+				html += '<td class="danger">' + performanceLista.toFixed(DIGITS_FLOAT) + '</td>';
+			} else {
+				console.log('aisdasdsa');
+			}
+		} else {
+			html += '<td class="info">' + performanceMatriz.toFixed(DIGITS_FLOAT) + '</td>';
+			html += '<td class="info">' + performanceLista.toFixed(DIGITS_FLOAT) + '</td>';
+		}
+		
+		html += '<td>' + Math.abs(performanceMatriz - performanceLista).toFixed(6) + '</td>';
+		
+		html += '<td>' + '(' + verticeSaida + ',' + verticeChegada + ')' + '</td>'
+		
+		html += '</tr>';
 	}
 	
 	tabelaBody.html(html);	
