@@ -228,7 +228,32 @@ function getPerformanceTime(method, iterations) {
         totalTime += (fim - inicio);
     }
 
-    return totalTime / iterations;
+    var returnValue = totalTime / iterations;
+	
+	if (returnValue == 0) 
+		return getPerformanceTime(method, iterations);
+	else
+		return returnValue;
+}
+
+function atualizarTabelaPerformance() {
+	var tabelaBody = $('#tabelaPerformance tbody');
+	
+	var rows = 5, iterations = 20, html = '';
+	
+	for (var i = 0; i < rows; i++) {
+		var verticeSaida = getRandomInt(0, 7);
+		var verticeChegada = getRandomInt(0, 7);
+		
+		html += '<tr><td>' + getPerformanceTime(function () { grafoMatrizCompleto.existeAresta(verticeSaida, verticeChegada); }, iterations).toFixed(6) + '</td>';
+		html += '<td>' + getPerformanceTime(function () { grafoListaAdjacenciaCompleto.existeAresta(verticeSaida, verticeChegada); }, iterations).toFixed(6) + '</td></tr>';
+	}
+	
+	tabelaBody.html(html);	
+}
+
+function getRandomInt(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
 $(function() {
@@ -246,7 +271,6 @@ $(function() {
 
     grafoListaAdjacencia.printListaAdjacencia('#tabelaListaAdjacenciaGrafoG');
     grafoListaAdjacenciaCompleto.printListaAdjacencia('#tabelaListaAdjacenciaGrafoH');
-
-    /*atualizarTabelaProcessamento('#tabelaProcessamentoMatriz', REPRESENTACAO_MATRIZ);
-    atualizarTabelaProcessamento('#tabelaProcessamentoLista', REPRESENTACAO_LISTA);*/
+	
+	atualizarTabelaPerformance();
 });
