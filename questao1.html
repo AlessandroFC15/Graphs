@@ -376,7 +376,7 @@
                         <p><em>É possível perceber alguma diferença entre o tempo que o procedimento leva para encontrar
                             arestas em H quando se compara matriz e lista? Explique.</em></p>
 
-                        <p>Através de diversas execuções do algoritmo acima, podemos perceber que não existe uma diferença significativa
+                        <p>Através de diversas execuções do algoritmo acima e com o auxílio da tabela de performance abaixo, podemos perceber que não existe uma diferença significativa
                         na performance do procedimento acima comparando a implementação por lista e a implementação por matriz de adjacência.</p>
 
                         <p>Tal análise não deve ser uma surpresa, visto que os métodos de cada implementação são bem semelhantes,
@@ -395,33 +395,39 @@
 
                         <h3 class="text-center">Comparação de Performance</h3>
 						
-						<div class="col-md-8 col-md-offset-2 text-center">
-							<table class='table table-hover text-center' id="tabelaPerformance">
-								<thead>
-									<th class="text-center">Matriz</th>
-									<th class="text-center">Lista</th>
-									<th class="text-center">Diferença</th>
-									<th class="text-center">Aresta</th>
-								</thead>
-								
-								<tbody>
+						<div class="row">
+							<div class="col-md-8 col-md-offset-2 text-center">
+								<table class='table table-hover text-center' id="tabelaPerformance">
+									<thead>
+										<th class="text-center">Matriz</th>
+										<th class="text-center">Lista</th>
+										<th class="text-center">Diferença</th>
+										<th class="text-center">Aresta</th>
+									</thead>
 									
-								</tbody>
-							</table>
+									<tbody>
+										
+									</tbody>
+								</table>
+								
+								
 							
+								<span class="label label-success">Mais Rápido</span>
+								<span class="label label-danger">Mais Lento</span>
+								<span class="label label-info">Performance Semelhante</span>
+								<br>
+								<br>
 							
+								<i class="material-icons" onclick="atualizarTabelaPerformance()" style="cursor: pointer;" data-toggle="tooltip" data-placement="bottom" title="Gerar arestas aleatórias">refresh</i>
+								<br>				
+							</div>
+						</div> 
 						
-							<span class="label label-success">Mais Rápido</span>
-							<span class="label label-danger">Mais Lento</span>
-							<span class="label label-info">Performance Semelhante</span>
-							<br>
-							<br>
-							
-							<i class="material-icons" onclick="atualizarTabelaPerformance()" style="cursor: pointer;" data-toggle="tooltip" data-placement="bottom" title="Gerar arestas aleatórias">refresh</i>
-							<br>
-							
-						</div>
-                    </div>
+						<br>
+					
+						<p>O algoritmo utilizado para coletar os tempos de performance da tabela acima gerou arestas aleatórias e tomou como tempo de performance a 
+						média do tempo de execução de 20 iterações. Como podemos observar, a diferença de performance entre as implementações é bem pequena e por vezes, imperceptível.</p>
+					</div>
                 </div>
             </div>
         </div>

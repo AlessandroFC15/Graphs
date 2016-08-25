@@ -131,21 +131,23 @@ function existeAresta() {
         grafoEscolhido.grafo.existeAresta(verticeSaida, verticeChegada);
     }, 5);
 
-    var html;
+    var html = "<strong>";
 
     if (testeExisteAresta) {
-        html = "A aresta (" + verticeSaida + ', ' + verticeChegada + ') existe no ' + grafoEscolhido.texto + '.';
+        html += "A aresta (" + verticeSaida + ', ' + verticeChegada + ') existe no ' + grafoEscolhido.texto + '.';
         mensagem.removeClass("alert-danger");
         mensagem.addClass("alert-success");
     } else {
-        html = 'A aresta (' + verticeSaida + ', ' + verticeChegada + ') não existe no ' + grafoEscolhido.texto + '.';
+        html += 'A aresta (' + verticeSaida + ', ' + verticeChegada + ') não existe no ' + grafoEscolhido.texto + '.';
         mensagem.removeClass("alert-success");
         mensagem.addClass("alert-danger");
     }
+	
+	html += '</strong>';
 
-    html += '<br>Performance: ' + (performance) + 's';
+    html += '<br>Performance: ' + (performance.toFixed(5)) + 's (Implementação de ' + escolhaImplementacao.capitalize() +')';
 
-    mensagem.html('<strong>' + html + '</strong>');
+    mensagem.html(html);
 
     mensagem.removeClass('hidden');
 }
@@ -279,6 +281,10 @@ function atualizarTabelaPerformance() {
 
 function getRandomInt(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+String.prototype.capitalize = function() {
+    return this.charAt(0).toUpperCase() + this.slice(1);
 }
 
 $(function() {
