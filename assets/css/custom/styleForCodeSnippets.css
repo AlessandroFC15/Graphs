@@ -1,0 +1,17 @@
+pre {
+    background-color: #3B3B3B;
+    color: white;
+}
+
+.keyword {
+    color: #5C7AB8;
+    font-weight: bold;
+}
+
+.instance_member_variable {
+    color: #828EBA;
+}
+
+.instance_member_function {
+    color: #D9AF6C;
+}
