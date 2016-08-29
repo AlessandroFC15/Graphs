@@ -6,7 +6,7 @@
     <link rel="icon" type="image/png" href="assets/img/favicon.png">
         
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-    <title>3ª Questão</title>
+    <title>4ª Questão</title>
 
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
     <meta name="viewport" content="width=device-width" />
@@ -167,12 +167,27 @@
 
                         <p>Já com a implementação por lista de adjacência, o procedimento utilizado resume-se a retornar a lista de vértices adjacentes do vértice, sem nenhum laço de repetição ou algo que dependa do número de vértices do grafo. Tal procedimento tem complexidade no tempo <strong>constante</strong>, enquanto que a função da matriz possui complexidade <strong>linear</strong>, crescendo conforme o número de vértices cresce. </p>
 
+                        <div class="row">
+
+                            <h3 class="text-center">Tabela de Performance</h3>
+
+                            <div class="col-md-8 col-md-offset-2">
+                                <table class="table table-hover text-center" id="tabelaPerformance">
+                                    <thead>
+                                    <th class="text-center">Vértice</th>
+                                    <th class="text-center">Matriz (s)</th>
+                                    <th class="text-center">Lista (s)</th>
+                                    </thead>
+                                    <tbody>
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
                         <p>Como no nosso caso, o número de vértices - 8 - é relativamente pequeno, a diferença entre a performance dos procedimentos acaba não sendo tão significativa. No entanto, conforme o número de vértices cresca é de esperar que a diferença entre as performances seja bem mais visível e amplificada.</p>
 
-                        
                         <canvas id="myChart" width="400" height="300"></canvas>
-
-                        
                     </div>
                 </div>
             </div>
