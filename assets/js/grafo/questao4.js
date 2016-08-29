@@ -2,7 +2,7 @@
  * Created by mystic_alex on 25/08/16.
  */
 
-const ITERATIONS = 100;
+const ITERATIONS = 200;
 const DIGITS = 6;
 
 var getGraphicData = function() {

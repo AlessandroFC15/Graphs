@@ -158,7 +158,6 @@
                     <div class="card-body">
                         <h2>Solução</h2>
 
-                       
                         <p>A análise detalhada acerca dos dados encontrados no item 3, que aplica o procedimento do item 2, fará uso da tabela e gráfico abaixo, para auxiliar na visualização da informação.</p>
 
                         <p><em><strong>Configuração Mais Rápida</strong></em></p>
@@ -186,6 +185,18 @@
                         </div>
 
                         <p>Como no nosso caso, o número de vértices - 8 - é relativamente pequeno, a diferença entre a performance dos procedimentos acaba não sendo tão significativa. No entanto, conforme o número de vértices cresca é de esperar que a diferença entre as performances seja bem mais visível e amplificada.</p>
+
+                        <p><em><strong>Diferença no tempo de execução entre vértices</strong></em></p>
+
+                        <p>Analisando a diferença entre os tempos de execução de diferentes vértices, não foi possível perceber
+                        desigualdades significativas. Ainda que em algumas ocasiões a implementação por matriz apresente um pico de execução,
+                        não podemos verificar um vértice em que o pico ocorre constantemente, ocorrendo em diversos vértices.
+                        Não era de se esperar mesmo que houvesse algum tipo de discrepância considerável entre os tempos de execução
+                        dos vértices, uma vez que os procedimentos para encontrar os vértices adjacentes não dependem das características
+                        individuais dos vértices.</p>
+
+                        <p>Além disso, como todos os vértices possuem 3 vértices adjacentes, não temos a situação de um vértice ter performance inferior
+                        a outro por causa da sua maior quantidade de vértices adjacentes. </p>
 
                         <canvas id="myChart" width="400" height="300"></canvas>
                     </div>
