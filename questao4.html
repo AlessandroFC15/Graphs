@@ -164,7 +164,9 @@
 
                         <p>Em relação à análise sobre qual configuração foi mais rápida, de acordo com os dados encontrados abaixo em diversas execuções, podemos observar que em média a implementação por <strong>lista de adjacência</strong> comportou-se de <em>maneira mais eficiente</em> do que a implementação por matriz de adjacência. Tal comportamento não deve ser encarado como surpresa, visto que o procedimento utilizado para encontrar vértices adjacentes utilizando matriz possui um loop que passa por toda uma linha da matriz, adicionando ou não vértices ao conjunto de vértices adjacentes dependendo do valor da célula. </p>
 
-                        <p>Já com a implementação por lista de adjacência, o procedimento utilizado resume-se a retornar a lista de vértices adjacentes do vértice, sem nenhum laço de repetição ou algo que dependa do número de vértices do grafo. Tal procedimento tem complexidade no tempo <strong>constante</strong>, enquanto que a função da matriz possui complexidade <strong>linear</strong>, crescendo conforme o número de vértices cresce. </p>
+                        <p>Já com a implementação por lista de adjacência, o procedimento utilizado resume-se a retornar a lista de vértices adjacentes do vértice, sem nenhum laço de repetição ou algo 
+						que dependa do número de vértices do grafo. Tal procedimento tem complexidade no tempo <strong>constante</strong>, enquanto que a função da matriz possui complexidade <strong>linear</strong>, 
+						crescendo conforme o número de vértices aumenta. </p>
 
                         <div class="row">
 
@@ -190,7 +192,7 @@
 
                         <p>Analisando a diferença entre os tempos de execução de diferentes vértices, não foi possível perceber
                         desigualdades significativas. Ainda que em algumas ocasiões a implementação por matriz apresente um pico de execução,
-                        não podemos verificar um vértice em que o pico ocorre constantemente, ocorrendo em diversos vértices.
+                        não podemos verificar um vértice em que o pico ocorre constantemente. Analisando o gráfico abaixo, verificamos que executando o procedimento diversas vezes, o pico ocorre em diferentes vértices.
                         Não era de se esperar mesmo que houvesse algum tipo de discrepância considerável entre os tempos de execução
                         dos vértices, uma vez que os procedimentos para encontrar os vértices adjacentes não dependem das características
                         individuais dos vértices.</p>
@@ -211,6 +213,12 @@
                 <div class="card">
                     <div class="card-body">
                         <h3><span class="glyphicon glyphicon-comment"></span><!--<i class="material-icons">&#xE87C;</i>--><span style="vertical-align: 3px">  Discussão</span></h3>
+						
+						<p>A fim de realizarmos uma coleta de dados em que os tempos de execução encontrados não fossem tão suscetíveis as variáveis do sistema, trabalhamos com um número de 200 iterações para cada método avaliado.
+						Foi verificado que com esse número mais alto de iterações as variações nos tempos de performance entre diferentes execuções não foi tão significativa, tendendo para um equilíbrio. O algoritmo utilizado para medir as
+						performances das implementações seguiu o seguinte modelo.</p>
+						
+						<pre>ADSAASDASD</pre>
 
                     </div>
                 </div>
