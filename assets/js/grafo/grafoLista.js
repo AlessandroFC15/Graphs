@@ -67,6 +67,27 @@ GrafoListaAdjacencia.prototype.getVerticesAdjacentes = function (vertice) {
     }
 };
 
+GrafoListaAdjacencia.prototype.inserirVertice = function () {
+    this.lista[this.numVertices] = [];
+    this.numVertices += 1;
+}
+
+GrafoListaAdjacencia.prototype.removerVertice = function (vertice) {
+    delete this.lista[vertice];
+    this.numVertices -= 1;
+    this.removerArestasDeVertice(vertice);
+}
+
+GrafoListaAdjacencia.prototype.removerArestasDeVertice = function (vertice) {
+    for (var v in this.lista) {
+        for (var i in this.lista[v]) {
+            if (this.lista[v][i] == vertice) {
+                this.lista[v].splice(i, 1);
+            }
+        }
+    }
+}
+
 function getTableRowListaAdjacencia(vertice, adjacentes) {
     var tableData = '<td><strong>' + vertice  +' ----> </strong></td>';
 

@@ -348,44 +348,6 @@
 <script src="assets/js/grafo/questoes1-6.js"></script>
 <script src="assets/js/grafo/sandbox.js"></script>
 
-<script type="text/javascript">
-    // create an array with nodes
-    var nodes = new vis.DataSet([
-        {id: 0, label: '0'},
-        {id: 1, label: '1'},
-        {id: 2, label: '2'},
-        {id: 3, label: '3'},
-        {id: 4, label: '4'},
-        {id: 5, label: '5'},
-        {id: 6, label: '6'},
-        {id: 7, label: '7'},
-    ]);
-
-    // create an array with edges
-    var edges = new vis.DataSet([
-        {from: 1, to: 3},
-        {from: 1, to: 2},
-        {from: 2, to: 4},
-        {from: 2, to: 5}
-    ]);
-
-    // create a network
-    var container = document.getElementById('mynetwork');
-
-    // provide the data in the vis format
-    var data = {
-        nodes: nodes,
-        edges: edges
-    };
-
-    var options = {
-
-    };
-
-    // initialize your network!
-    var network = new vis.Network(container, data, options);
-</script>
-
 <script>
     $(function () {
         $.material.init();
