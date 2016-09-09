@@ -6,7 +6,7 @@
     <link rel="icon" type="image/png" href="assets/img/favicon.png">
         
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-    <title>4ª Questão</title>
+    <title>5ª Questão</title>
 
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
     <meta name="viewport" content="width=device-width" />
@@ -70,8 +70,8 @@
                       <li><a href="questao1.html">Questão 1</a></li>
                       <li><a href="questao2.html">Questão 2</a></li>
                       <li><a href="questao3.html">Questão 3</a></li>
-                      <li class="active"><a href="#">Questão 4</a></li>
-                      <li><a href="questao5.html">Questão 5</a></li>
+                      <li><a href="questao4.html">Questão 4</a></li>
+                      <li class="active"><a href="#">Questão 5</a></li>
                   </ul>
               </li>
 
@@ -118,9 +118,10 @@
             <div class="jumbotron" style="background-color: #636363; -webkit-box-shadow: none;
     box-shadow: none; color: whitesmoke">
                 <div class="container">
-                    <h1>4ª Questão</h1>
-                    <p>A 4ª questão pedia uma análise detalhada dos resultados encontrados na questões 2 e 3, abordando questões como qual tipo de implementação
-                    foi mais eficiente, se existe alguma diferença no tempo de execução comparando-se diversos vértices, entre outras avaliações. 
+                    <h1>5ª Questão</h1>
+                    <p>A 5ª questão pedia que o grafo G fosse transformado em um grafo completo e as questões 3 e 4 fossem repetidas com
+                        o novo grafo em questão. Logo, abaixo temos o cálculo do tempo de processamento gasto para encontrar o conjunto de
+                        vértices adjacentes a cada um dos vértices de H e em seguida, um estudo detalhado acerca dos dados encontrados no Item 3.
 
                     </p>
                 </div>
@@ -141,9 +142,8 @@
                         <br>
                         <img src="assets/img/grafos/grafoG.png" class="center-block">
                         <br>
-                        <p>4) Faça um <strong>estudo detalhado</strong> acerca dos dados encontrados no <a href="questao3.html">Item 3</a>. Por exemplo,
-                        que configuração foi mais rápida? Existe diferença no tempo de execução entre os
-                        vértices? Por quê?</p>
+                        <p>5) Transforme o <strong>grafo G</strong> em um <strong>grafo completo H</strong>. Depois, repita os
+                            <strong>Itens 3 e 4</strong> para o grafo H. O que pode ser concluído comparando os estudos realizados em G e H?</p>
                     </div>
                 </div>
             </div>
@@ -158,17 +158,49 @@
                     <div class="card-body">
                         <h2>Solução</h2>
 
-                        <p>A análise detalhada acerca dos dados encontrados no item 3, que aplica o procedimento do item 2, fará uso da tabela e gráfico abaixo, para auxiliar na visualização da informação.</p>
+                        <h3>+ ITEM 3</h3>
+
+                        <p>O item 3 pedia o tempo de processamento gasto pelo procedimento implementado no Item
+                            2 para encontrar o conjunto de vértices adjacentes a cada um dos vértices de G, no caso dessa questão, será para o grafo
+                            completo H. A questão também pedia para fazer a análise da performance para as duas configurações: matriz e lista de adjacência.</p>
+
+                        <div class="row">
+                            <div class="col-md-8 col-md-offset-2 text-center">
+                                <table class="table table-striped text-center" id="tabelaPerformance">
+                                    <thead>
+                                    <th class="text-center col-md-3">Vértice</th>
+                                    <th class="text-center col-md-3">Adjacentes</th>
+                                    <th class="text-center col-md-3">Matriz (s)</th>
+                                    <th class="text-center col-md-3">Lista (s)</th>
+                                    </thead>
+
+                                    <tbody>
+
+                                    </tbody>
+                                </table>
+
+                                <i class="material-icons" onclick="atualizarTabelaPerformance()" style="cursor: pointer;">refresh</i>
+                            </div>
+                        </div>
+
+                        <h3>+ ITEM 4</h3>
 
                         <p><em><strong>Configuração Mais Rápida</strong></em></p>
 
-                        <p>Em relação à análise sobre qual configuração foi mais rápida, de acordo com os dados encontrados abaixo em diversas execuções, podemos observar que em média a implementação por <strong>lista de adjacência</strong> comportou-se de <em>maneira mais eficiente</em> do que a implementação por matriz de adjacência. Tal comportamento não deve ser encarado como surpresa, visto que o procedimento utilizado para encontrar vértices adjacentes utilizando matriz possui um loop que passa por toda uma linha da matriz, adicionando ou não vértices ao conjunto de vértices adjacentes dependendo do valor da célula. </p>
+                        <p>Analisando a tabela acima, com auxílio da coloração para demonstrar qual configuração foi mais eficiente em cada execução, podemos verificar
+                        que a implementação por <strong>lista de adjacência</strong> comportou-se de <em>maneira mais eficiente</em> do que a implementação por matriz de adjacência, assim como ocorreu no grafo G.</p>
 
-                        <p>Já com a implementação por lista de adjacência, o procedimento utilizado resume-se a retornar a lista de vértices adjacentes do vértice, sem nenhum laço de repetição ou algo 
-						que dependa do número de vértices do grafo. Tal procedimento tem complexidade no tempo <strong>constante</strong>, enquanto que a função da matriz possui complexidade <strong>linear</strong>, 
-						crescendo conforme o número de vértices aumenta. </p>
+                        <p>Novamente, tal resultado já era esperado, visto que na análise do grafo G, no item 4, já havíamos encontrado este comportamento. Aumentando o número de vértices adjacentes de cada vértice,
+                            a tendência era que a diferença entre os tempos de execução apenas aumentasse, visto que a implementação por lista de adjacência deveria permanecer constante,
+                            enquanto que a configuração de matriz tem comportamento linear. Ainda que o número de vértices tenha permanecido o mesmo, o número de vértices adjacentes aumentou, aumentando
+                            também a quantidade de vezes que o procedimento da matriz entra no <em>if</em>, para adicionar determinado vértice à lista de vértices adjacentes.
+                        </p>
 
-                        <div class="row">
+                        <p>O procedimento utilizado para encontrar os vértices adjacentes no grafo H é o mesmo que foi utilizado para o grafo G, logo a análise
+                        das razões pelas quais a implementação por lista de adjacência é em média mais eficiente do que a matriz seguem as mesmas e já foram discutidas no item 4.
+                        Para efeito de lembrança, a lista de adjacẽncia apenas retorna uma lista já armazenada, logo característica constante, enquanto que a matriz possui complexidade no tempo linear.</p>
+
+                        <!--<div class="row">
 
                             <h3 class="text-center">Tabela de Performance</h3>
 
@@ -184,61 +216,34 @@
                                     </tbody>
                                 </table>
                             </div>
-                        </div>
-
-                        <p>Como no nosso caso, o número de vértices - 8 - é relativamente pequeno, a diferença entre a performance dos procedimentos acaba não sendo tão significativa. No entanto, conforme o número de vértices cresca é de esperar que a diferença entre as performances seja bem mais visível e amplificada.</p>
+                        </div>-->
 
                         <p><em><strong>Diferença no tempo de execução entre vértices</strong></em></p>
 
-                        <p>Analisando a diferença entre os tempos de execução de diferentes vértices, não foi possível perceber
-                        desigualdades significativas. Ainda que em algumas ocasiões a implementação por matriz apresente um pico de execução,
-                        não podemos verificar um vértice em que o pico ocorre constantemente. Analisando o gráfico abaixo, verificamos que executando o procedimento diversas vezes, o pico ocorre em diferentes vértices.
-                        Não era de se esperar mesmo que houvesse algum tipo de discrepância considerável entre os tempos de execução
-                        dos vértices, uma vez que os procedimentos para encontrar os vértices adjacentes não dependem das características
-                        individuais dos vértices.</p>
+                        <p>Em relação à possíveis discrepâncias entre as performances comparando-se diferentes vértices, não houve
+                        diferenças significativas. Como todos os vértices possuem o mesmo número de vértices adjacentes, não existem realmente
+                        razões para um vértice ter performance significativamente inferior ou superior à outro vértice. </p>
 
-                        <p>Além disso, como todos os vértices possuem 3 vértices adjacentes, não temos a situação de um vértice ter performance inferior
-                        a outro por causa da sua maior quantidade de vértices adjacentes. </p>
+                        <p>Caso um vértice possuísse um número elevado de vértices adjacentes enquanto outro tivesse uma quantidade bem menor, talvez neste caso pudéssemos verificar uma diferença
+                        nos tempos de execução e muito provavelmente isso só seria verificável na implementação por matriz, onde uma execução entraria no <em>if</em> presente no loop em todas as iterações
+                            enquanto que a outra nunca entraria, sendo a condição sempre avaliada como false. Ainda assim, a complexidade no tempo seria de O(n), pois ambos casos entrariam no loop, logo não podemos afirmar que a diferença no tempo seria perceptível.</p>
 
-                        <canvas id="myChart" width="400" height="300"></canvas>
+                        <p>Para a implementação por lista de adjacência, ainda que houvesse grande diferença entre o número de vértices adjacentes
+                        de um vértice para outro, seria uma surpresa se os tempos de performance fossem bem diferentes, visto que a performance do procedimento deste
+                        tipo de configuração não depende do número de vértices adjacentes, já que o método apenas retorna uma lista já existente e não possui loops nem nada do tipo.</p>
+
+                        <h3>+ COMPARAÇÃO ENTRE GRAFO G E GRAFO H</h3>
+
+                        <p>Comparação matriz entre G e H</p>
+
+                        <p>Comparação lista entre G e H</p>
                     </div>
                 </div>
             </div>
         </div>
          <br>
         <br>
-        <!--Discussão-->
-        <div class="row">
-            <div class="col-lg-8 col-lg-offset-2">
-                <div class="card">
-                    <div class="card-body">
-                        <h3><span class="glyphicon glyphicon-comment"></span><!--<i class="material-icons">&#xE87C;</i>--><span style="vertical-align: 3px">  Discussão</span></h3>
-						
-						<p>A fim de realizarmos uma coleta de dados em que os tempos de execução encontrados não fossem tão suscetíveis as variáveis do sistema, trabalhamos com um número de 200 iterações para cada método avaliado.
-						Foi verificado que com esse número mais alto de iterações as variações nos tempos de performance entre diferentes execuções não foi tão significativa, tendendo para um equilíbrio. O algoritmo utilizado para medir as
-						performances das implementações seguiu o seguinte modelo.</p>
-						
-						<pre>
-function getPerformanceTime(method, iterations) {
-    var totalTime = 0;
 
-    for (var i = 0; i < iterations; i++) {
-        var inicio = performance.now();
-
-        method();
-
-        var fim = performance.now();
-
-        totalTime += (fim - inicio);
-    }
-
-    return totalTime / iterations;
-}</pre>
-
-                    </div>
-                </div>
-            </div>
-        </div>
     </div>
 
     <br>
@@ -249,8 +254,8 @@ function getPerformanceTime(method, iterations) {
 
         <div class="row">
             <div class="col-md-4 col-md-offset-4 text-center">
-                <a href="questao3.html" class="btn btn-primary btn-fab" data-toggle="tooltip" data-placement="left" title="3ª Questão" ><i class="material-icons">arrow_backward</i></a>
-                <a href="questao5.html" class="btn btn-primary btn-fab" data-toggle="tooltip" data-placement="right" title="5ª Questão" ><i class="material-icons">arrow_forward</i></a>
+                <a href="questao4.html" class="btn btn-primary btn-fab" data-toggle="tooltip" data-placement="left" title="4ª Questão" ><i class="material-icons">arrow_backward</i></a>
+                <a href="questao6.html" class="btn btn-primary btn-fab" data-toggle="tooltip" data-placement="right" title="6ª Questão" ><i class="material-icons">arrow_forward</i></a>
             </div>
         </div>
 
@@ -274,7 +279,7 @@ function getPerformanceTime(method, iterations) {
 <script src="assets/js/grafo/grafoMatriz.js"></script>
 <script src="assets/js/grafo/grafoLista.js"></script>
 <script src="assets/js/grafo/questoes1-6.js"></script>
-<script src="assets/js/grafo/questao4.js"></script>
+<script src="assets/js/grafo/questao5.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.2.2/Chart.bundle.js"></script>
 
 <script>

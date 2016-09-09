@@ -26,7 +26,7 @@ var getRowTabelaPerformance = function(i, grafoM, grafoL) {
             '<td>' + getPerformanceTime(function () { grafoL.getVerticesAdjacentes(i); }, ITERATIONS).toFixed(DIGITS) + '</td>';
 
     return '<tr>' + html +'</tr>';
-}
+};
 
 $(function () {
     atualizarTabelaPerformance();
