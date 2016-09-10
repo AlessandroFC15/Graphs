@@ -2,14 +2,78 @@
  * Created by mystic_alex on 21/08/16.
  */
 
-var grafo;
+var cor = [], predecessor = [], tempo = 0, d = [], f = [];
 
-$(function() {
-    grafo = getDigrafoQuestao();
+var dfs = function (verticeInicial) {
+    cor = [];
+    predecessor = [];
+    d = [];
+    f = [];
 
-    grafo.atualizarSelect('#verticeOrigem');
-    grafo.atualizarSelect('#verticeDestino');
-});
+    for (var u = 0; u < grafo.numVertices; u++) {
+        cor[u] = 'BRANCO';
+        predecessor[u] = null;
+    };
+
+    tempo = 0;
+
+    var listaVertices = [...Array(grafo.numVertices).keys()];
+
+    listaVertices = listaVertices.filter(function(element){ return element != verticeInicial});
+
+    listaVertices.unshift(verticeInicial);
+
+    for (var u = 0; u < grafo.numVertices; u++) {
+        if (cor[listaVertices[u]] == 'BRANCO') {
+            visitaDFS(listaVertices[u]);
+        }
+    };
+}
+
+var visitaDFS = function(u) {
+    cor[u] = 'CINZA';
+    tempo++;
+    d[u] = tempo;
+
+    var adjacentes = grafo.getVerticesAdjacentes(u);
+
+    for (var i in adjacentes) {
+        var v = adjacentes[i];
+
+        if (cor[v] == 'BRANCO') {
+            predecessor[v] = u;
+            visitaDFS(v);
+        }
+    }
+
+    cor[u] = 'PRETO';
+    tempo++;
+    f[u] = tempo;
+}
+
+function atualizarTabelaDFS() {
+    var tabelaBody = $('#tabelaDFS tbody');
+
+    tabelaBody.empty();
+
+    for (var i = 0; i < grafo.numVertices; i++) {
+        var tr = document.createElement('tr');
+
+        tr.appendChild(getTableCell(i));
+        tr.appendChild(getTableCell(d[i]));
+        tr.appendChild(getTableCell(f[i]));
+       
+        tabelaBody.append(tr);
+    }
+}
+
+var getTableCell = function (content) {
+    var cell = document.createElement('td');
+
+    cell.appendChild(document.createTextNode(content));
+
+    return cell;
+};
 
 function getCaminhoMaisCurto(origem, destino) {
     var retorno = $('#caminhoMaisCurtoResultado');
@@ -29,32 +93,35 @@ function getCaminhoMaisCurto(origem, destino) {
     retorno.removeClass('hidden');
 }
 
-function getDigrafoQuestao() {
-    var grafo = new GrafoMatriz(10, DIRECIONADO);
+function atualizarOrdemDeVisitaDFS(ordemVisita) {
+    var mensagem = $('#ordemDeVisita');
+    mensagem.removeClass('hidden');
 
-    grafo.inserirAresta(9, 7);
-    grafo.inserirAresta(7, 9);
-    grafo.inserirAresta(3, 7);
-    grafo.inserirAresta(0, 3);
-    grafo.inserirAresta(0, 2);
-    grafo.inserirAresta(8, 0);
-    grafo.inserirAresta(3, 8);
-    grafo.inserirAresta(4, 8);
-    grafo.inserirAresta(1, 8);
-    grafo.inserirAresta(1, 4);
-    grafo.inserirAresta(2, 5);
-    grafo.inserirAresta(5, 6);
-    grafo.inserirAresta(6, 2);
-
-    return grafo;
+    mensagem.find('span').text(ordemVisita.join(' --> '));
 }
 
-function inverterVertices() {
-    var verticeOrigem = $('#verticeOrigem');
-    var verticeDestino = $('#verticeDestino');
+$(function() {
+    encontrarBuscaEmProfundidade(0);
+});
 
-    var temp = verticeOrigem.val();
+function encontrarBuscaEmProfundidade(verticeInicial) {
+    dfs(verticeInicial);
 
-    verticeOrigem.val(verticeDestino.val());
-    verticeDestino.val(temp);
+    atualizarTabelaDFS();
+
+    var inicioTempoVertices = [];
+
+    for (var i = 0; i < grafo.numVertices; i++) {
+        inicioTempoVertices.push({indice: i, inicio: d[i]});
+    }
+
+    inicioTempoVertices.sort(function(a, b) { 
+        return a.inicio - b.inicio;
+    });
+
+    ordemVisita = inicioTempoVertices.map(function(element) { return element.indice;})
+
+    atualizarOrdemDeVisitaDFS(ordemVisita);
 }
+
+
