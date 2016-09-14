@@ -1,15 +1,15 @@
 <!doctype html>
 <html lang="en">
 <head>
-    <meta charset="utf-8" />
+    <meta charset="utf-8"/>
     <link rel="apple-touch-icon" sizes="76x76" href="assets/img/apple-icon.png">
     <link rel="icon" type="image/png" href="assets/img/favicon.png">
-        
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
     <title>6ª Questão</title>
 
-    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
-    <meta name="viewport" content="width=device-width" />
+    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport'/>
+    <meta name="viewport" content="width=device-width"/>
 
     <!-- Material Design fonts -->
     <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Roboto:300,400,500,700">
@@ -25,30 +25,31 @@
     <!-- Bootstrap Material Design -->
     <link rel="stylesheet" type="text/css" href="assets/css/bootstrap-material-design.min.css">
     <link rel="stylesheet" type="text/css" href="assets/css/ripples.min.css">
-    
+
     <!--     Font Awesome     -->
     <link href="bootstrap3/css/font-awesome.css" rel="stylesheet">
     <link href='http://fonts.googleapis.com/css?family=Grand+Hotel' rel='stylesheet' type='text/css'>
 
     <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.11.0/css/bootstrap-select.min.css">
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.11.0/css/bootstrap-select.min.css">
 
     <link rel="stylesheet" href="assets/css/custom/styleForCodeSnippets.css">
 
     <style>
         body {
-          padding-top: 40px;
-          padding-bottom: 20px;
+            padding-top: 40px;
+            padding-bottom: 20px;
         }
 
         .dark-label {
-            color: #6D6D6D!important;
+            color: #6D6D6D !important;
         }
     </style>
 
     <!-- Network library -->
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vis/4.16.1/vis.min.js"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/vis/4.16.1/vis.min.css" rel="stylesheet" type="text/css" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/vis/4.16.1/vis.min.css" rel="stylesheet" type="text/css"/>
 
     <style type="text/css">
         #mynetwork {
@@ -58,124 +59,135 @@
         }
     </style>
 
-    </head>
+</head>
 
 <body>
-    <nav class="navbar navbar-primary navbar-fixed-top">
-      <div class="container">
+<nav class="navbar navbar-primary navbar-fixed-top">
+    <div class="container">
         <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="template.html">Lista de Grafos</a>
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#collapseExample"
+                    aria-expanded="false" aria-controls="collapseExample">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="template.html">Lista de Grafos</a>
         </div>
 
         <div id="collapseExample" class="navbar-collapse collapse">
-          <ul class="nav navbar-nav">
-              <li><a href="template.html">Home</a></li>
-              <li class="dropdown active">
-                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Questões 1-5 <span class="caret"></span></a>
-                  <ul class="dropdown-menu">
-                      <li><a href="questao1.html">Questão 1</a></li>
-                      <li><a href="questao2.html">Questão 2</a></li>
-                      <li><a href="questao3.html">Questão 3</a></li>
-                      <li><a href="questao4.html">Questão 4</a></li>
-                      <li class="active"><a href="#">Questão 5</a></li>
-                  </ul>
-              </li>
+            <ul class="nav navbar-nav">
+                <li><a href="template.html">Home</a></li>
+                <li class="dropdown active">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                       aria-expanded="false">Questões 1-5 <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="questao1.html">Questão 1</a></li>
+                        <li><a href="questao2.html">Questão 2</a></li>
+                        <li><a href="questao3.html">Questão 3</a></li>
+                        <li><a href="questao4.html">Questão 4</a></li>
+                        <li class="active"><a href="#">Questão 5</a></li>
+                    </ul>
+                </li>
 
-              <li class="dropdown">
-                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Questões 6-9 <span class="caret"></span></a>
-                  <ul class="dropdown-menu">
-                      <li><a href="#">Questão 6</a></li>
-                      <li><a href="#">Questão 7</a></li>
-                      <li><a href="#">Questão 8</a></li>
-                      <li><a href="#">Questão 9</a></li>
-                  </ul>
-              </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                       aria-expanded="false">Questões 6-9 <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">Questão 6</a></li>
+                        <li><a href="#">Questão 7</a></li>
+                        <li><a href="#">Questão 8</a></li>
+                        <li><a href="#">Questão 9</a></li>
+                    </ul>
+                </li>
 
-              <li class="dropdown">
-                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Questões 10-11 <span class="caret"></span></a>
-                  <ul class="dropdown-menu">
-                      <li><a href="#">Questão 10</a></li>
-                      <li><a href="#">Questão 11</a></li>
-                  </ul>
-              </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                       aria-expanded="false">Questões 10-11 <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">Questão 10</a></li>
+                        <li><a href="#">Questão 11</a></li>
+                    </ul>
+                </li>
 
-              <li class="dropdown">
-                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Questões 12-14 <span class="caret"></span></a>
-                  <ul class="dropdown-menu">
-                      <li><a href="#">Questão 12</a></li>
-                      <li><a href="#">Questão 13</a></li>
-                      <li><a href="#">Questão 14</a></li>
-                  </ul>
-              </li>
-          </ul>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                       aria-expanded="false">Questões 12-14 <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">Questão 12</a></li>
+                        <li><a href="#">Questão 13</a></li>
+                        <li><a href="#">Questão 14</a></li>
+                    </ul>
+                </li>
+            </ul>
         </div>
-      </div>
-    </nav>
+    </div>
+</nav>
 
-    <br>
+<br>
 
-    <!--Jumbotron header página-->
-    <div class="card" style="
+<!--Jumbotron header página-->
+<div class="card" style="
     -webkit-box-shadow: none;
     box-shadow: none;
     background-color: #636363;">
-        <div class="container" style="background-color: #636363;">
-            <!-- Main jumbotron for a primary marketing message or call to action -->
-            <div class="jumbotron" style="background-color: #636363; -webkit-box-shadow: none;
+    <div class="container" style="background-color: #636363;">
+        <!-- Main jumbotron for a primary marketing message or call to action -->
+        <div class="jumbotron" style="background-color: #636363; -webkit-box-shadow: none;
     box-shadow: none; color: whitesmoke">
-                <div class="container">
-                    <h1>6ª Questão</h1>
-                    <p>A 5ª questão pedia que o grafo G fosse transformado em um grafo completo e as questões 3 e 4 fossem repetidas com
-                        o novo grafo em questão. Logo, abaixo temos o cálculo do tempo de processamento gasto para encontrar o conjunto de
-                        vértices adjacentes a cada um dos vértices de H e em seguida, um estudo detalhado acerca dos dados encontrados no Item 3.
+            <div class="container">
+                <h1>6ª Questão</h1>
 
-                    </p>
+                <p>A 5ª questão pedia que o grafo G fosse transformado em um grafo completo e as questões 3 e 4 fossem
+                    repetidas com
+                    o novo grafo em questão. Logo, abaixo temos o cálculo do tempo de processamento gasto para encontrar
+                    o conjunto de
+                    vértices adjacentes a cada um dos vértices de H e em seguida, um estudo detalhado acerca dos dados
+                    encontrados no Item 3.
+
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--Content-->
+<div class="container" style="margin-top: -30px; ">
+    <!--Comando da Questão-->
+    <div class="row">
+        <div class="col-lg-8 col-lg-offset-2">
+            <div class="card">
+                <div class="card-body">
+                    <h2>Comando da Questão</h2>
+                    <br>
+
+                    <p>Dado o grafo não direcionado G abaixo:</p>
+                    <br>
+                    <img src="assets/img/grafos/grafo6_9.png" class="center-block">
+                    <br>
+
+                    <p>6) Mostre como a busca em profundidade funciona para o dígrafo D, ou seja, informe a
+                        ordem de visita dos vértices. Em seguida, elabore um procedimento computacional
+                        para validar o resultado encontrado. Apresente o log de execução</p>
                 </div>
             </div>
         </div>
     </div>
+    <br>
+    <br>
 
-    <!--Content-->
-    <div class="container" style="margin-top: -30px; ">
-        <!--Comando da Questão-->
-        <div class="row">
-            <div class="col-lg-8 col-lg-offset-2">
-                <div class="card">
-                    <div class="card-body">
-                        <h2>Comando da Questão</h2>
-                        <br>
-                        <p>Dado o grafo não direcionado G abaixo:</p>
-                        <br>
-                        <img src="assets/img/grafos/grafo6_9.png" class="center-block">
-                        <br>
-                        <p>6) Mostre como a busca em profundidade funciona para o dígrafo D, ou seja, informe a
-                            ordem de visita dos vértices. Em seguida, elabore um procedimento computacional
-                            para validar o resultado encontrado. Apresente o log de execução</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <br>
-        <br>
+    <!--Solução-->
+    <div class="row">
+        <div class="col-lg-8 col-lg-offset-2">
+            <div class="card">
+                <div class="card-body">
+                    <h2>Solução</h2>
 
-        <!--Solução-->
-        <div class="row">
-            <div class="col-lg-8 col-lg-offset-2">
-                <div class="card">
-                    <div class="card-body">
-                        <h2>Solução</h2>
+                    <div class="form-group form-group-lg">
+                        <label for="vertice" class="col-md-2 control-label">Vértice Inicial</label>
 
-                      <div class="form-group form-group-lg">
-                          <label for="vertice" class="col-md-2 control-label">Vértice Inicial</label>
-
-                          <div class="col-md-1 text-center">
-                              <select id="vertice" class="form-control" style="padding: 0 0 0 8px;">
+                        <div class="col-md-1 text-center">
+                            <select id="vertice" class="form-control" style="padding: 0 0 0 8px;">
                                 <option>0</option>
                                 <option>1</option>
                                 <option>2</option>
@@ -186,86 +198,119 @@
                                 <option>7</option>
                                 <option>8</option>
                                 <option>9</option>
-                              </select>
-                              </select>
-                          </div>
-                      </div>
-
-                      <div class="row">
-                        <div class="col-md-12">
-                          <button type="button" class='btn btn-primary' onclick="encontrarBuscaEmProfundidade($('#vertice').val())">Busca em Profundidade</button>
+                            </select>
                         </div>
-                      </div>
-
-                      <div class="row">
-                        <div class="col-md-12">
-                          <div class="alert alert-success text-center hidden" id='ordemDeVisita'>Ordem de visita: <strong><span></span></strong></div>
-                        </div>
-                      </div>
-
-                      <div class="row">
-                        <div class="col-md-6 col-md-offset-3">
-                          <table class="table table-striped" id='tabelaDFS'>
-                            <thead>
-                              <th class="text-center">Vértice</th>
-                              <th class="text-center">Início</th>
-                              <th class="text-center">Final</th>
-                            
-                            </thead>
-                            <tbody class="text-center">
-                              
-                            </tbody>
-                          </table>
-                        </div>
-                      </div>
-
                     </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <button type="button" class='btn btn-primary'
+                                    onclick="encontrarBuscaEmProfundidade($('#vertice').val(), grafo, '#ordemDeVisita')">Busca em Profundidade
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="alert alert-success text-center hidden" id='ordemDeVisita'>Ordem de visita:
+                                <strong><span></span></strong></div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 col-md-offset-3">
+                            <table class="table table-striped" id='tabelaDFS'>
+                                <thead>
+                                <th class="text-center">Vértice</th>
+                                <th class="text-center">Início</th>
+                                <th class="text-center">Final</th>
+
+                                </thead>
+                                <tbody class="text-center">
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </div>
-         <br>
-        <br>
+    </div>
+    <br>
+    <br>
 
-        <div class="row">
-            <div class="col-lg-8 col-lg-offset-2">
-                <div class="card">
-                    <div class="card-body">
-                        <h2>Execução</h2>
+    <div class="row">
+        <div class="col-lg-8 col-lg-offset-2">
+            <div class="card">
+                <div class="card-body">
+                    <h2>Execução</h2>
 
-                        <br>
+                    <br>
 
+                    <div class="row">
                         <div class="col-md-10 col-md-offset-1">
                             <div id="mynetwork"></div>
                         </div>
                     </div>
+
+                    <div class="row">
+                        <div class="form-group form-group-lg">
+                            <label for="verticeNetwork" class="col-md-2 control-label">Vértice Inicial</label>
+
+                            <div class="col-md-1 text-center">
+                                <input type="number" min="0" id="verticeNetwork" class="form-control" value="0">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <button type="button" class='btn btn-primary'
+                                    onclick="encontrarBuscaEmProfundidade($('#verticeNetwork').val(), grafoNetwork, '#ordemDeVisitaNetwork')">Busca em Profundidade
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="alert alert-success text-center hidden" id='ordemDeVisitaNetwork'>Ordem de visita:
+                                <strong><span></span></strong></div>
+                        </div>
+                    </div>
+
+
                 </div>
             </div>
         </div>
-        <br>
-        <br>
-
-
     </div>
-
+    <br>
     <br>
 
-    <!--Navigation and footer-->
-    <div class="container">
-        <br>
 
-        <div class="row">
-            <div class="col-md-4 col-md-offset-4 text-center">
-                <a href="questao4.html" class="btn btn-primary btn-fab" data-toggle="tooltip" data-placement="left" title="4ª Questão" ><i class="material-icons">arrow_backward</i></a>
-                <a href="questao6.html" class="btn btn-primary btn-fab" data-toggle="tooltip" data-placement="right" title="6ª Questão" ><i class="material-icons">arrow_forward</i></a>
-            </div>
+</div>
+
+<br>
+
+<!--Navigation and footer-->
+<div class="container">
+    <br>
+
+    <div class="row">
+        <div class="col-md-4 col-md-offset-4 text-center">
+            <a href="questao4.html" class="btn btn-primary btn-fab" data-toggle="tooltip" data-placement="left"
+               title="4ª Questão"><i class="material-icons">arrow_backward</i></a>
+            <a href="questao6.html" class="btn btn-primary btn-fab" data-toggle="tooltip" data-placement="right"
+               title="6ª Questão"><i class="material-icons">arrow_forward</i></a>
         </div>
-
-        <hr>
-
-        <footer>
-            <p>&copy; MysticAlex 2016</p>
-        </footer>
     </div>
+
+    <hr>
+
+    <footer>
+        <p>&copy; MysticAlex 2016</p>
+    </footer>
+</div>
 </body>
 
 <script src="jquery/jquery-1.10.2.js" type="text/javascript"></script>

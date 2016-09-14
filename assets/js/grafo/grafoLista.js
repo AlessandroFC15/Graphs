@@ -68,7 +68,6 @@ GrafoListaAdjacencia.prototype.getVerticesAdjacentes = function (vertice) {
 };
 
 GrafoListaAdjacencia.prototype.inserirVertice = function (vertice) {
-    console.log(vertice);
     if (! vertice)
         this.lista[this.numVertices] = [];
     else
@@ -107,6 +106,10 @@ GrafoListaAdjacencia.prototype.removerAresta = function(verticeSaida, verticeChe
     } else {
         console.log('A aresta não existe no grafo!');
     }
+};
+
+GrafoListaAdjacencia.prototype.getListaVertices = function() {
+    return Object.keys(this.lista);
 };
 
 function getTableRowListaAdjacencia(vertice, adjacentes) {

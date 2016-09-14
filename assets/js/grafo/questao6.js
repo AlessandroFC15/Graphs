@@ -2,26 +2,24 @@
  * Created by mystic_alex on 21/08/16.
  */
 
-var cor = [], predecessor = [], tempo = 0, d = [], f = [];
+var cor = {}, predecessor = {}, tempo = 0, d = {}, f = {};
 var network;
-var grafoNetwork;
+var grafoNetwork, grafo;
 
-var dfs = function (verticeInicial) {
+var dfs = function (graph, verticeInicial) {
     cor = [];
     predecessor = [];
     d = [];
     f = [];
 
-    for (var u = 0; u < grafo.numVertices; u++) {
+    var listaVertices = graph.getListaVertices();
+
+    for (var u in listaVertices) {
         cor[u] = 'BRANCO';
         predecessor[u] = null;
     }
 
     tempo = 0;
-
-    var listaVertices = [...Array(grafo.numVertices).keys()
-    ]
-    ;
 
     listaVertices = listaVertices.filter(function (element) {
         return element != verticeInicial
@@ -29,27 +27,26 @@ var dfs = function (verticeInicial) {
 
     listaVertices.unshift(verticeInicial);
 
-    for (var u = 0; u < grafo.numVertices; u++) {
+    for (var u in graph.getListaVertices()) {
         if (cor[listaVertices[u]] == 'BRANCO') {
-            visitaDFS(listaVertices[u]);
+            visitaDFS(listaVertices[u], graph);
         }
     }
-    ;
 };
 
-var visitaDFS = function (u) {
+var visitaDFS = function (u, graph) {
     cor[u] = 'CINZA';
     tempo++;
     d[u] = tempo;
 
-    var adjacentes = grafo.getVerticesAdjacentes(u);
+    var adjacentes = graph.getVerticesAdjacentes(u);
 
     for (var i in adjacentes) {
         var v = adjacentes[i];
 
         if (cor[v] == 'BRANCO') {
             predecessor[v] = u;
-            visitaDFS(v);
+            visitaDFS(v, graph);
         }
     }
 
@@ -100,22 +97,24 @@ function getCaminhoMaisCurto(origem, destino) {
     retorno.removeClass('hidden');
 }
 
-function atualizarOrdemDeVisitaDFS(ordemVisita) {
-    var mensagem = $('#ordemDeVisita');
+function atualizarOrdemDeVisitaDFS(ordemVisita, idMensagem) {
+    var mensagem = $(idMensagem);
     mensagem.removeClass('hidden');
 
     mensagem.find('span').text(ordemVisita.join(' --> '));
 }
 
-function encontrarBuscaEmProfundidade(verticeInicial) {
-    dfs(verticeInicial);
+function encontrarBuscaEmProfundidade(verticeInicial, grafo, idMensagem) {
+    dfs(grafo, verticeInicial);
 
     atualizarTabelaDFS();
 
     var inicioTempoVertices = [];
 
-    for (var i = 0; i < grafo.numVertices; i++) {
-        inicioTempoVertices.push({indice: i, inicio: d[i]});
+    var listaVertices = grafo.getListaVertices();
+
+    for (var i in listaVertices) {
+        inicioTempoVertices.push({indice: listaVertices[i], inicio: d[listaVertices[i]]});
     }
 
     inicioTempoVertices.sort(function (a, b) {
@@ -124,9 +123,9 @@ function encontrarBuscaEmProfundidade(verticeInicial) {
 
     ordemVisita = inicioTempoVertices.map(function (element) {
         return element.indice;
-    })
+    });
 
-    atualizarOrdemDeVisitaDFS(ordemVisita);
+    atualizarOrdemDeVisitaDFS(ordemVisita, idMensagem);
 }
 
 var criarGrafo = function () {
@@ -244,12 +243,12 @@ var criarGrafo = function () {
 };
 
 $(function () {
-    encontrarBuscaEmProfundidade(0);
+    grafo = getGrafoQuestao6_9(GrafoMatriz);
+
+    encontrarBuscaEmProfundidade(0, grafo, '#ordemDeVisita');
 
     network = criarGrafo();
 
     grafoNetwork = getGrafoQuestao6_9(GrafoListaAdjacencia);
-
-    console.log(grafoNetwork)
 });
 
