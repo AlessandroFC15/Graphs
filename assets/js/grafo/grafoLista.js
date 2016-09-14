@@ -67,16 +67,20 @@ GrafoListaAdjacencia.prototype.getVerticesAdjacentes = function (vertice) {
     }
 };
 
-GrafoListaAdjacencia.prototype.inserirVertice = function () {
-    this.lista[this.numVertices] = [];
+GrafoListaAdjacencia.prototype.inserirVertice = function (vertice) {
+    console.log(vertice);
+    if (! vertice)
+        this.lista[this.numVertices] = [];
+    else
+        this.lista[vertice] = [];
     this.numVertices += 1;
-}
+};
 
 GrafoListaAdjacencia.prototype.removerVertice = function (vertice) {
     delete this.lista[vertice];
     this.numVertices -= 1;
     this.removerArestasDeVertice(vertice);
-}
+};
 
 GrafoListaAdjacencia.prototype.removerArestasDeVertice = function (vertice) {
     for (var v in this.lista) {
@@ -86,7 +90,24 @@ GrafoListaAdjacencia.prototype.removerArestasDeVertice = function (vertice) {
             }
         }
     }
-}
+};
+
+GrafoListaAdjacencia.prototype.removerAresta = function(verticeSaida, verticeChegada) {
+    if (this.lista.hasOwnProperty(verticeSaida) && this.lista.hasOwnProperty(verticeChegada)) {
+        this.lista[verticeSaida] = this.lista[verticeSaida].filter(function (vertice) {
+            return vertice != verticeChegada;
+        });
+
+        if (this.tipoGrafo == NAO_DIRECIONADO) {
+            this.lista[verticeChegada] = this.lista[verticeChegada].filter(function (vertice) {
+                return vertice != verticeSaida;
+            });
+        }
+
+    } else {
+        console.log('A aresta não existe no grafo!');
+    }
+};
 
 function getTableRowListaAdjacencia(vertice, adjacentes) {
     var tableData = '<td><strong>' + vertice  +' ----> </strong></td>';

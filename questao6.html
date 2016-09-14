@@ -46,6 +46,18 @@
         }
     </style>
 
+    <!-- Network library -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vis/4.16.1/vis.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/vis/4.16.1/vis.min.css" rel="stylesheet" type="text/css" />
+
+    <style type="text/css">
+        #mynetwork {
+            width: 600px;
+            height: 400px;
+            border: 1px solid lightgray;
+        }
+    </style>
+
     </head>
 
 <body>
@@ -214,6 +226,25 @@
          <br>
         <br>
 
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2">
+                <div class="card">
+                    <div class="card-body">
+                        <h2>Execução</h2>
+
+                        <br>
+
+                        <div class="col-md-10 col-md-offset-1">
+                            <div id="mynetwork"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br>
+        <br>
+
+
     </div>
 
     <br>
@@ -249,6 +280,7 @@
 <script src="assets/js/grafo/grafoMatriz.js"></script>
 <script src="assets/js/grafo/grafoLista.js"></script>
 <script src="assets/js/grafo/questoes6-9.js"></script>
+<script src="assets/js/grafo/sandbox.js"></script>
 <script src="assets/js/grafo/questao6.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.2.2/Chart.bundle.js"></script>
 

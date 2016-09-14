@@ -4,8 +4,9 @@
 
 var grafo;
 
-function getGrafoMatrizQuestao6_9() {
-    var grafo = new GrafoMatriz(10, DIRECIONADO);
+function getGrafoQuestao6_9(tipoGrafo) {
+
+    var grafo = new tipoGrafo(10, DIRECIONADO);
 
     grafo.inserirAresta(9, 7);
     grafo.inserirAresta(7, 9);
@@ -25,5 +26,5 @@ function getGrafoMatrizQuestao6_9() {
 }
 
 $(function() {
-    grafo = getGrafoMatrizQuestao6_9();
+    grafo = getGrafoQuestao6_9(GrafoMatriz);
 });
