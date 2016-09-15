@@ -100,11 +100,27 @@ function getCaminhoMaisCurto(origem, destino) {
 function atualizarOrdemDeVisitaDFS(ordemVisita, idMensagem) {
     var mensagem = $(idMensagem);
     mensagem.removeClass('hidden');
+    mensagem.removeClass('alert-danger');
+    mensagem.addClass('alert-success');
 
-    mensagem.find('span').text(ordemVisita.join(' --> '));
+    mensagem.text('Ordem de visita: ' + ordemVisita.join(' --> '));
 }
 
+var imprimirMensagemErro = function (idMensagem, verticeInicial) {
+    var mensagem = $(idMensagem);
+    mensagem.removeClass('hidden');
+    mensagem.removeClass('alert-success');
+    mensagem.addClass('alert-danger');
+
+    mensagem.text('O vértice ' + verticeInicial + ' não existe no grafo!');
+};
+
 function encontrarBuscaEmProfundidade(verticeInicial, grafo, idMensagem) {
+    if (! grafo.existeVertice(verticeInicial)) {
+        imprimirMensagemErro(idMensagem, verticeInicial);
+        return;
+    }
+
     dfs(grafo, verticeInicial);
 
     atualizarTabelaDFS();
@@ -245,7 +261,7 @@ var criarGrafo = function () {
 $(function () {
     grafo = getGrafoQuestao6_9(GrafoMatriz);
 
-    encontrarBuscaEmProfundidade(0, grafo, '#ordemDeVisita');
+    encontrarBuscaEmProfundidade('0', grafo, '#ordemDeVisita');
 
     network = criarGrafo();
 

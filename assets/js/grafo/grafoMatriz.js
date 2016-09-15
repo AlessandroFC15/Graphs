@@ -165,7 +165,13 @@ GrafoMatriz.prototype.caminhoMinimoDijkstra = function (vertice) {
 };
 
 GrafoMatriz.prototype.getListaVertices = function() {
-    return [...Array(this.numVertices).keys()];
+    var lista = [...Array(this.numVertices).keys()];
+
+    return lista.map(function(element) { return element.toString()});
+};
+
+GrafoMatriz.prototype.existeVertice = function(vertice) {
+    return this.getListaVertices().indexOf(vertice.toString()) != -1
 };
 
 function formatarDados(d, antecessor, vertice) {
