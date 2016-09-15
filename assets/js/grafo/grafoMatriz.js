@@ -174,6 +174,11 @@ GrafoMatriz.prototype.existeVertice = function(vertice) {
     return this.getListaVertices().indexOf(vertice.toString()) != -1
 };
 
+GrafoMatriz.prototype.resetarGrafo = function(numVertices) {
+    this.lista = initializeMatriz(numVertices);
+    this.numVertices = numVertices;
+};
+
 function formatarDados(d, antecessor, vertice) {
     var dados = {};
     

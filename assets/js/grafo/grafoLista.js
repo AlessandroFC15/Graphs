@@ -7,11 +7,15 @@ function GrafoListaAdjacencia(numVertices, tipoGrafo) {
 GrafoListaAdjacencia.prototype.inserirAresta = function(verticeSaida, verticeChegada) {
     if (this.lista[verticeSaida] && this.lista[verticeChegada]) {
         this.lista[verticeSaida].push(verticeChegada);
-        this.lista[verticeSaida].sort();
+        this.lista[verticeSaida].sort(function compareNumbers(a, b) {
+            return a - b;
+        });
 
         if (this.tipoGrafo == NAO_DIRECIONADO) {
             this.lista[verticeChegada].push(verticeSaida);
-            this.lista[verticeChegada].sort();
+            this.lista[verticeChegada].sort(function compareNumbers(a, b) {
+                return a - b;
+            });
         }
     } else {
         console.log("# Insira vértices válidos. #");
@@ -116,6 +120,11 @@ GrafoListaAdjacencia.prototype.getListaVertices = function() {
 
 GrafoListaAdjacencia.prototype.existeVertice = function(vertice) {
     return this.getListaVertices().indexOf(vertice.toString()) != -1
+};
+
+GrafoListaAdjacencia.prototype.resetarGrafo = function(numVertices) {
+    this.lista = initializarLista(numVertices);
+    this.numVertices = numVertices;
 };
 
 function getTableRowListaAdjacencia(vertice, adjacentes) {

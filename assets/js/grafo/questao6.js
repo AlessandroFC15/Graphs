@@ -258,6 +258,18 @@ var criarGrafo = function () {
     return new vis.Network(container, data, options);
 };
 
+var resetGraph = function (grafoVisual, grafoRepresentacao) {
+    grafoVisual.setData({
+        nodes: new vis.DataSet([
+                {id: 0, label: '0', x: 50, y: 0, physics: false}
+            ]
+        ),
+        edges: new vis.DataSet([])
+    });
+
+    grafoRepresentacao.resetarGrafo(1);
+};
+
 $(function () {
     grafo = getGrafoQuestao6_9(GrafoMatriz);
 
