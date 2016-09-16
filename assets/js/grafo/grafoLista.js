@@ -126,6 +126,20 @@ GrafoListaAdjacencia.prototype.resetarGrafo = function(numVertices) {
     this.numVertices = numVertices;
 };
 
+GrafoListaAdjacencia.prototype.getGrafoTransposto = function() {
+    var grafoTransposto = new GrafoListaAdjacencia(this.numVertices, this.tipoGrafo);
+
+    for (var vertice in this.lista) {
+        var adjacentes = this.lista[vertice];
+
+        for (var i in adjacentes) {
+            grafoTransposto.inserirAresta(adjacentes[i], vertice);
+        }
+    }
+
+    return grafoTransposto;
+};
+
 function getTableRowListaAdjacencia(vertice, adjacentes) {
     var tableData = '<td><strong>' + vertice  +' ----> </strong></td>';
 
