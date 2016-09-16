@@ -53,7 +53,6 @@
 
     <style type="text/css">
         #mynetwork {
-            width: 600px;
             height: 400px;
             border: 1px solid lightgray;
         }
@@ -78,7 +77,7 @@
         <div id="collapseExample" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
                 <li><a href="template.html">Home</a></li>
-                <li class="dropdown active">
+                <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                        aria-expanded="false">Questões 1-5 <span class="caret"></span></a>
                     <ul class="dropdown-menu">
@@ -86,15 +85,15 @@
                         <li><a href="questao2.html">Questão 2</a></li>
                         <li><a href="questao3.html">Questão 3</a></li>
                         <li><a href="questao4.html">Questão 4</a></li>
-                        <li class="active"><a href="#">Questão 5</a></li>
+                        <li><a href="#">Questão 5</a></li>
                     </ul>
                 </li>
 
-                <li class="dropdown">
+                <li class="dropdown active">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                        aria-expanded="false">Questões 6-9 <span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a href="#">Questão 6</a></li>
+                        <li class="active"><a href="#">Questão 6</a></li>
                         <li><a href="#">Questão 7</a></li>
                         <li><a href="#">Questão 8</a></li>
                         <li><a href="#">Questão 9</a></li>
@@ -205,7 +204,7 @@
                     <div class="row">
                         <div class="col-md-12">
                             <button type="button" class='btn btn-primary'
-                                    onclick="encontrarBuscaEmProfundidade($('#vertice').val(), grafo, '#ordemDeVisita')">
+                                    onclick="encontrarBuscaEmProfundidade($('#vertice').val(), grafo, '#ordemDeVisita', '#tabelaDFS')">
                                 Busca em Profundidade
                             </button>
                         </div>
@@ -271,17 +270,23 @@
                     <div class="row">
                         <div class="col-md-12">
                             <button type="button" class='btn btn-primary'
-                                    onclick="encontrarBuscaEmProfundidade($('#verticeNetwork').val(), grafoNetwork, '#ordemDeVisitaNetwork')">
+                                    onclick="encontrarBuscaEmProfundidade($('#verticeNetwork').val(), grafoNetwork, '#ordemDeVisitaNetwork',
+                                    '#tabelaDFSDirecionado', '#buttonTabelaDFSDirecionado')">
                                 Busca em Profundidade
                             </button>
                         </div>
                     </div>
 
-                    <div class="row">
+                    <div class="row text-center">
                         <div class="col-md-12">
                             <strong>
-                                <div class="alert alert-success text-center hidden" id='ordemDeVisitaNetwork'></div>
+                                <div class="alert alert-success text-center hidden" style="margin-bottom: 0;" id='ordemDeVisitaNetwork'></div>
                             </strong>
+
+                            <!-- Button trigger modal -->
+                            <button type="button" id="buttonTabelaDFSDirecionado" class="text-center btn btn-default btn-xs hidden" data-toggle="modal" data-target="#modalGrafoDirecionado">
+                                Verificar tempos de início/fim
+                            </button>
                         </div>
                     </div>
 
@@ -327,18 +332,25 @@
                     <div class="row">
                         <div class="col-md-12">
                             <button type="button" class='btn btn-primary'
-                                    onclick="encontrarBuscaEmProfundidade($('#verticeNetworkNaoDirecionado').val(), grafoNetworkNaoDirecionado, '#ordemDeVisitaNetworkNaoDirecionado')">
+                                    onclick="encontrarBuscaEmProfundidade($('#verticeNetworkNaoDirecionado').val(),
+                                    grafoNetworkNaoDirecionado, '#ordemDeVisitaNetworkNaoDirecionado',
+                                    '#tabelaDFSNaoDirecionado', '#buttonTabelaDFSNaoDirecionado')">
                                 Busca em Profundidade
                             </button>
                         </div>
                     </div>
 
                     <div class="row">
-                        <div class="col-md-12">
+                        <div class="col-md-12 text-center">
                             <strong>
-                                <div class="alert alert-success text-center hidden"
+                                <div style="margin-bottom: 0" class="alert alert-success text-center hidden"
                                      id='ordemDeVisitaNetworkNaoDirecionado'></div>
                             </strong>
+
+                            <!-- Button trigger modal -->
+                            <button type="button" id="buttonTabelaDFSNaoDirecionado" class="text-center btn btn-default btn-xs hidden" data-toggle="modal" data-target="#modalGrafoNaoDirecionado">
+                                Verificar tempos de início/fim
+                            </button>
                         </div>
                     </div>
 
@@ -359,10 +371,10 @@
 
     <div class="row">
         <div class="col-md-4 col-md-offset-4 text-center">
-            <a href="questao4.html" class="btn btn-primary btn-fab" data-toggle="tooltip" data-placement="left"
-               title="4ª Questão"><i class="material-icons">arrow_backward</i></a>
-            <a href="questao6.html" class="btn btn-primary btn-fab" data-toggle="tooltip" data-placement="right"
-               title="6ª Questão"><i class="material-icons">arrow_forward</i></a>
+            <a href="questao5.html" class="btn btn-primary btn-fab" data-toggle="tooltip" data-placement="left"
+               title="5ª Questão"><i class="material-icons">arrow_backward</i></a>
+            <a href="questao7.html" class="btn btn-primary btn-fab" data-toggle="tooltip" data-placement="right"
+               title="7ª Questão"><i class="material-icons">arrow_forward</i></a>
         </div>
     </div>
 
@@ -373,6 +385,69 @@
     </footer>
 </div>
 </body>
+
+<!-- Modal | Tabela DFS Grafo Direcionado-->
+<div class="modal fade" id="modalGrafoDirecionado" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Tabela de tempos de início e fim | Grafo Direcionado</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-6 col-md-offset-3">
+                        <table class="table table-striped" id='tabelaDFSDirecionado'>
+                            <thead>
+                            <th class="text-center">Vértice</th>
+                            <th class="text-center">Início</th>
+                            <th class="text-center">Final</th>
+
+                            </thead>
+                            <tbody class="text-center">
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="modalGrafoNaoDirecionado" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Tabela de tempos de início e fim | Grafo Não-Direcionado</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-6 col-md-offset-3">
+                        <table class="table table-striped" id='tabelaDFSNaoDirecionado'>
+                            <thead>
+                            <th class="text-center">Vértice</th>
+                            <th class="text-center">Início</th>
+                            <th class="text-center">Final</th>
+
+                            </thead>
+                            <tbody class="text-center">
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 <script src="jquery/jquery-1.10.2.js" type="text/javascript"></script>
 <script src="assets/js/jquery-ui-1.10.4.custom.min.js" type="text/javascript"></script>

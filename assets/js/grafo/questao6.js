@@ -57,19 +57,27 @@ var visitaDFS = function (u, graph) {
     f[u] = tempo;
 };
 
-function atualizarTabelaDFS() {
-    var tabelaBody = $('#tabelaDFS tbody');
+function atualizarTabelaDFS(d, f, grafo, idTabela, idButtonTabela) {
+    var tabelaBody = $('tbody', idTabela);
 
     tabelaBody.empty();
 
-    for (var i = 0; i < grafo.numVertices; i++) {
+    var listaVertices = grafo.getListaVertices();
+
+    for (var i in listaVertices) {
+        var vertice = listaVertices[i];
+
         var tr = document.createElement('tr');
 
-        tr.appendChild(getTableCell(i));
-        tr.appendChild(getTableCell(d[i]));
-        tr.appendChild(getTableCell(f[i]));
+        tr.appendChild(getTableCell(vertice));
+        tr.appendChild(getTableCell(d[vertice]));
+        tr.appendChild(getTableCell(f[vertice]));
 
         tabelaBody.append(tr);
+    }
+
+    if (idButtonTabela !== undefined) {
+        $(idButtonTabela).removeClass('hidden');
     }
 }
 
@@ -108,24 +116,28 @@ function atualizarOrdemDeVisitaDFS(ordemVisita, idMensagem) {
     mensagem.text('Ordem de visita: ' + ordemVisita.join(' --> '));
 }
 
-var imprimirMensagemErro = function (idMensagem, verticeInicial) {
+var imprimirMensagemErro = function (idMensagem, verticeInicial, idButtonTabela) {
     var mensagem = $(idMensagem);
     mensagem.removeClass('hidden');
     mensagem.removeClass('alert-success');
     mensagem.addClass('alert-danger');
 
     mensagem.text('O vértice ' + verticeInicial + ' não existe no grafo!');
+
+    if (idButtonTabela !== undefined) {
+        $(idButtonTabela).addClass('hidden');
+    }
 };
 
-function encontrarBuscaEmProfundidade(verticeInicial, grafo, idMensagem) {
+function encontrarBuscaEmProfundidade(verticeInicial, grafo, idMensagem, idTabela, idButtonTabela) {
     if (! grafo.existeVertice(verticeInicial)) {
-        imprimirMensagemErro(idMensagem, verticeInicial);
+        imprimirMensagemErro(idMensagem, verticeInicial, idButtonTabela);
         return;
     }
 
     dfs(grafo, verticeInicial);
 
-    atualizarTabelaDFS();
+    atualizarTabelaDFS(d, f, grafo, idTabela, idButtonTabela);
 
     var inicioTempoVertices = [];
 
@@ -219,7 +231,7 @@ function getRepresentacaoGrafoNaoDirecionadoQuestao6(tipoGrafo) {
 $(function () {
     grafo = getGrafoQuestao6_9(GrafoMatriz);
 
-    encontrarBuscaEmProfundidade('0', grafo, '#ordemDeVisita');
+    encontrarBuscaEmProfundidade('0', grafo, '#ordemDeVisita', '#tabelaDFS');
 
     grafoNetwork = getGrafoQuestao6_9(GrafoListaAdjacencia);
     network = criarGrafoQuestao6();
