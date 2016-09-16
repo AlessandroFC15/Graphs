@@ -205,7 +205,8 @@
                     <div class="row">
                         <div class="col-md-12">
                             <button type="button" class='btn btn-primary'
-                                    onclick="encontrarBuscaEmProfundidade($('#vertice').val(), grafo, '#ordemDeVisita')">Busca em Profundidade
+                                    onclick="encontrarBuscaEmProfundidade($('#vertice').val(), grafo, '#ordemDeVisita')">
+                                Busca em Profundidade
                             </button>
                         </div>
                     </div>
@@ -240,11 +241,12 @@
     <br>
     <br>
 
+    <!-- Execução | Grafo Direcionado-->
     <div class="row">
         <div class="col-lg-8 col-lg-offset-2">
             <div class="card">
                 <div class="card-body">
-                    <h2>Execução</h2>
+                    <h2>Execução | Grafo Direcionado</h2>
 
                     <br>
 
@@ -252,7 +254,9 @@
                         <div class="col-md-10 col-md-offset-1">
                             <div id="mynetwork"></div>
 
-                            <button class="btn btn-default btn-xs" style="float: right" type="button" onclick="resetGraph(network, grafoNetwork)">Resetar Grafo</button>
+                            <button class="btn btn-default btn-xs" style="float: right" type="button"
+                                    onclick="resetGraph(network, grafoNetwork)">Resetar Grafo
+                            </button>
                         </div>
                     </div>
 
@@ -267,7 +271,8 @@
                     <div class="row">
                         <div class="col-md-12">
                             <button type="button" class='btn btn-primary'
-                                    onclick="encontrarBuscaEmProfundidade($('#verticeNetwork').val(), grafoNetwork, '#ordemDeVisitaNetwork')">Busca em Profundidade
+                                    onclick="encontrarBuscaEmProfundidade($('#verticeNetwork').val(), grafoNetwork, '#ordemDeVisitaNetwork')">
+                                Busca em Profundidade
                             </button>
                         </div>
                     </div>
@@ -279,6 +284,8 @@
                             </strong>
                         </div>
                     </div>
+
+                    <br>
                 </div>
             </div>
         </div>
@@ -286,7 +293,62 @@
     <br>
     <br>
 
+    <!-- Execução | Grafo Não-Direcionado-->
+    <div class="row">
+        <div class="col-lg-8 col-lg-offset-2">
+            <div class="card">
+                <div class="card-body">
+                    <h2>Execução | Grafo Não-Direcionado</h2>
 
+                    <br>
+                    <br>
+
+                    <div class="row">
+                        <div class="col-md-10 col-md-offset-1">
+                            <div id="grafoVisualNaoDirecionado"
+                                 style="border: 1px solid lightgray; height: 400px!important"></div>
+
+                            <button class="btn btn-default btn-xs" style="float: right" type="button"
+                                    onclick="resetGraph(networkNaoDirecionado, grafoNetworkNaoDirecionado)">Resetar
+                                Grafo
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="form-group form-group-lg">
+                        <label for="verticeNetworkNaoDirecionado" class="col-md-2 control-label">Vértice Inicial</label>
+
+                        <div class="col-md-2 text-center">
+                            <input type="number" min="0" id="verticeNetworkNaoDirecionado" class="form-control"
+                                   value="0">
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <button type="button" class='btn btn-primary'
+                                    onclick="encontrarBuscaEmProfundidade($('#verticeNetworkNaoDirecionado').val(), grafoNetworkNaoDirecionado, '#ordemDeVisitaNetworkNaoDirecionado')">
+                                Busca em Profundidade
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <strong>
+                                <div class="alert alert-success text-center hidden"
+                                     id='ordemDeVisitaNetworkNaoDirecionado'></div>
+                            </strong>
+                        </div>
+                    </div>
+
+                    <br>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br>
+    <br>
 </div>
 
 <br>
@@ -319,6 +381,8 @@
 <script src="assets/js/material-design/material.min.js"></script>
 <script src="assets/js/material-design/ripples.min.js"></script>
 
+<script src="assets/js/grafoNetwork/grafoNetwork.js"></script>
+
 <script src="assets/js/grafo/helpers.js"></script>
 <script src="assets/js/grafo/mainGrafo.js"></script>
 <script src="assets/js/grafo/grafoMatriz.js"></script>
@@ -326,7 +390,7 @@
 <script src="assets/js/grafo/questoes6-9.js"></script>
 <script src="assets/js/grafo/sandbox.js"></script>
 <script src="assets/js/grafo/questao6.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.2.2/Chart.bundle.js"></script>
+<script src="assets/js/Chart.bundle.js"></script>
 
 <script>
     $(function () {

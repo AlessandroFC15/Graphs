@@ -6,6 +6,8 @@ var cor = {}, predecessor = {}, tempo = 0, d = {}, f = {};
 var network;
 var grafoNetwork, grafo;
 
+var networkNaoDirecionado, grafoNetworkNaoDirecionado;
+
 var dfs = function (graph, verticeInicial) {
     cor = [];
     predecessor = [];
@@ -144,7 +146,7 @@ function encontrarBuscaEmProfundidade(verticeInicial, grafo, idMensagem) {
     atualizarOrdemDeVisitaDFS(ordemVisita, idMensagem);
 }
 
-var criarGrafo = function () {
+var criarGrafoQuestao6 = function () {
     // create an array with nodes
     var nodes = new vis.DataSet([
             {id: 0, label: '0', x: 0, y: 0, physics: false},
@@ -177,106 +179,52 @@ var criarGrafo = function () {
         {from: 7, to: 9, id: '7to9'}
     ]);
 
-    // create a network
-    var container = document.getElementById('mynetwork');
-
-    // provide the data in the vis format
-    var data = {
-        nodes: nodes,
-        edges: edges
-    };
-
-    var options = {
-        locales: locales,
-        physics: {
-            stabilization: true
-        },
-        nodes: {
-            physics: false,
-            color: {
-                border: '#000000',
-                background: '#FFFFFF',
-                highlight: {
-                    border: '#2B7CE9',
-                    background: '#D2E5FF'
-                },
-                hover: {
-                    border: '#FFFFFF',
-                    background: '#D2E5FF'
-                }
-            }
-        },
-        manipulation: {
-            enabled: true,
-            initiallyActive: true,
-            addNode: function (nodeData, callback) {
-                var vertice = grafoNetwork.numVertices;
-
-                for (var i = 0; i < 50; i++) {
-                    if (!(i in grafoNetwork.lista)) {
-                        vertice = i;
-                        break;
-                    }
-                }
-
-                nodeData.id = vertice;
-                nodeData.label = vertice;
-                grafoNetwork.inserirVertice(vertice);
-                callback(nodeData);
-            },
-            addEdge: function (edgeData, callback) {
-                edgeData.id = edgeData.from + 'to' + edgeData.to;
-                grafoNetwork.inserirAresta(edgeData.from, edgeData.to);
-                callback(edgeData);
-            },
-            editNode: function (data, callback) {
-                console.log("Quer editar??")
-            },
-            editEdge: true,
-            deleteNode: function (data, callback) {
-                grafoNetwork.removerVertice(data.nodes[0]);
-                callback(data);
-            },
-            deleteEdge: function (edgeData, callback) {
-                var verticesEnvolvidos = edgeData.edges[0].split('to');
-
-                grafoNetwork.removerAresta(verticesEnvolvidos[0], verticesEnvolvidos[1]);
-
-                callback(edgeData);
-
-            },
-            controlNodeStyle: {
-                // all node options are valid.
-            }
-        },
-        edges: {
-            arrows: 'to'
-        }
-    };
-
-    // initialize your network!
-    return new vis.Network(container, data, options);
+    return criarGrafo(nodes, edges, 'mynetwork', grafoNetwork, DIRECIONADO);
 };
 
-var resetGraph = function (grafoVisual, grafoRepresentacao) {
-    grafoVisual.setData({
-        nodes: new vis.DataSet([
-                {id: 0, label: '0', x: 50, y: 0, physics: false}
-            ]
-        ),
-        edges: new vis.DataSet([])
-    });
+var criarGrafoNaoDirecionadoQuestao6 = function () {
+    // create an array with nodes
+    var nodes = new vis.DataSet([
+            {id: 0, label: '0', x: 0, y: 0, physics: false},
+            {id: 1, label: '1', x: 200, y: 0, physics: false},
+            {id: 2, label: '2', x: 200, y: 150, physics: false},
+            {id: 3, label: '3', x: 0, y: 150, physics: false},
+        ]
+    );
 
-    grafoRepresentacao.resetarGrafo(1);
+    // create an array with edges
+    var edges = new vis.DataSet([
+        {from: 0, to: 1, id: '0to1'},
+        {from: 1, to: 2, id: '1to2'},
+        {from: 2, to: 3, id: '2to3'},
+        {from: 3, to: 0, id: '3to0'},
+
+    ]);
+
+    return criarGrafo(nodes, edges, 'grafoVisualNaoDirecionado', grafoNetworkNaoDirecionado, NAO_DIRECIONADO);
 };
+
+function getRepresentacaoGrafoNaoDirecionadoQuestao6(tipoGrafo) {
+
+    var grafo = new tipoGrafo(4, NAO_DIRECIONADO);
+
+    grafo.inserirAresta(0, 1);
+    grafo.inserirAresta(1, 2);
+    grafo.inserirAresta(2, 3);
+    grafo.inserirAresta(3, 0);
+
+    return grafo;
+}
 
 $(function () {
     grafo = getGrafoQuestao6_9(GrafoMatriz);
 
     encontrarBuscaEmProfundidade('0', grafo, '#ordemDeVisita');
 
-    network = criarGrafo();
-
     grafoNetwork = getGrafoQuestao6_9(GrafoListaAdjacencia);
+    network = criarGrafoQuestao6();
+
+    grafoNetworkNaoDirecionado = getRepresentacaoGrafoNaoDirecionadoQuestao6(GrafoListaAdjacencia);
+    networkNaoDirecionado = criarGrafoNaoDirecionadoQuestao6();
 });
 

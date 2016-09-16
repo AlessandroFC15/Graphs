@@ -11,7 +11,7 @@ GrafoListaAdjacencia.prototype.inserirAresta = function(verticeSaida, verticeChe
             return a - b;
         });
 
-        if (this.tipoGrafo == NAO_DIRECIONADO) {
+        if (this.tipoGrafo == NAO_DIRECIONADO && verticeSaida !== verticeChegada) {
             this.lista[verticeChegada].push(verticeSaida);
             this.lista[verticeChegada].sort(function compareNumbers(a, b) {
                 return a - b;
@@ -74,7 +74,7 @@ GrafoListaAdjacencia.prototype.getVerticesAdjacentes = function (vertice) {
 };
 
 GrafoListaAdjacencia.prototype.inserirVertice = function (vertice) {
-    if (! vertice)
+    if (vertice === undefined)
         this.lista[this.numVertices] = [];
     else
         this.lista[vertice] = [];
@@ -103,12 +103,11 @@ GrafoListaAdjacencia.prototype.removerAresta = function(verticeSaida, verticeChe
             return vertice != verticeChegada;
         });
 
-        if (this.tipoGrafo == NAO_DIRECIONADO) {
+        if (this.tipoGrafo == NAO_DIRECIONADO && verticeSaida !== verticeChegada) {
             this.lista[verticeChegada] = this.lista[verticeChegada].filter(function (vertice) {
                 return vertice != verticeSaida;
             });
         }
-
     } else {
         console.log('A aresta não existe no grafo!');
     }
