@@ -59,6 +59,30 @@ var visitaDFS = function (u, graph) {
     f[u] = tempo;
 };
 
+var visitaDFSComponentes = function (u, graph, subGrafo) {
+    cor[u] = 'CINZA';
+    tempo++;
+    d[u] = tempo;
+
+    subGrafo.push(u);
+    console.log(subGrafo);
+
+    var adjacentes = graph.getVerticesAdjacentes(u);
+
+    for (var i in adjacentes) {
+        var v = adjacentes[i];
+
+        if (cor[v] == 'BRANCO') {
+            predecessor[v] = u;
+            visitaDFSComponentes(v, graph, subGrafo);
+        }
+    }
+
+    cor[u] = 'PRETO';
+    tempo++;
+    f[u] = tempo;
+};
+
 function encontrarBuscaEmProfundidade(verticeInicial, grafo, ordemVisitaVertices) {
     dfs(grafo, verticeInicial, ordemVisitaVertices);
 }
@@ -160,20 +184,20 @@ var encontrarSubGrafosBuscaEmProfundidade = function(verticeInicial, graph, list
     var subGrafoAtual = [];
 
     for (var u in listaVertices) {
+        console.log(listaVertices[u])
         if (cor[listaVertices[u]] == 'BRANCO') {
-            visitaDFS(listaVertices[u], graph);
+
+            visitaDFSComponentes(listaVertices[u], graph, subGrafoAtual);
 
             if (subGrafoAtual.length > 0) {
                 subGrafos.push(subGrafoAtual);
             }
 
-            subGrafoAtual = [listaVertices[u]];
-        } else {
-            subGrafoAtual.push(listaVertices[u]);
-        }
+            subGrafoAtual = [];
+        } 
     }
 
-    if (subGrafoAtual !== []) 
+    if (subGrafoAtual.length > 0) 
         subGrafos.push(subGrafoAtual);
 
     return subGrafos;
@@ -189,6 +213,7 @@ var imprimirComponentesFortementeConexos = function(componentes, idMensagem) {
         
         for (var i = 0; i < componentes.length; i++) {
             var componente = document.createElement("p");
+            componentes[i].sort(function(a,b){return a - b});
             componente.appendChild(document.createTextNode((i + 1) + 'º componente: ' + componentes[i].join(', ')));
             strong.appendChild(componente);
         }
