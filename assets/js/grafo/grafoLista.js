@@ -140,6 +140,43 @@ GrafoListaAdjacencia.prototype.getGrafoTransposto = function() {
     return grafoTransposto;
 };
 
+GrafoListaAdjacencia.prototype.existeCiclo = function() {
+    var visitados = {}, recStack = {};
+
+    for (var vertice in this.lista) {
+        visitados[vertice] = false;
+        recStack[vertice] = false;
+    }
+
+    for (var vertice in this.lista) {
+        if (this.existeCicloHelper(vertice, visitados, recStack)) {
+            return true;
+        }
+    }
+
+    return false;
+};
+
+GrafoListaAdjacencia.prototype.existeCicloHelper = function(vertice, visitados, recStack) {
+    if (visitados[vertice] == false) {
+        visitados[vertice] = true;
+        recStack[vertice] = true;
+
+        var adjacentes = this.getVerticesAdjacentes(vertice);
+
+        for (var i = 0; i < adjacentes.length; i++) {
+            if (! visitados[adjacentes[i]] && this.existeCicloHelper(adjacentes[i], visitados, recStack)) {
+                return true;
+            } else if (recStack[adjacentes[i]]) {
+                return true;
+            }
+        }
+    }
+
+    recStack[vertice] = false;
+    return false;
+};
+
 function getTableRowListaAdjacencia(vertice, adjacentes) {
     var tableData = '<td><strong>' + vertice  +' ----> </strong></td>';
 
