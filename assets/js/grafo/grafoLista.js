@@ -214,7 +214,7 @@ GrafoListaAdjacencia.prototype.iniciarBuscaEmLargura = function(verticeEscolhido
 };
 
 GrafoListaAdjacencia.prototype.buscaEmLargura = function(verticeEscolhido) {
-    if (verticeEscolhido >= 0 && verticeEscolhido < this.numVertices) {
+    if (this.existeVertice(verticeEscolhido)) {
         var grafoBusca = this.iniciarBuscaEmLargura(verticeEscolhido);
 
         var Q = [grafoBusca[verticeEscolhido]];

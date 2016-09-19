@@ -95,8 +95,8 @@
                     <ul class="dropdown-menu">
                         <li><a href="questao6.html">Questão 6</a></li>
                         <li><a href="questao7.html">Questão 7</a></li>
-                        <li class="active"><a href="#">Questão 8</a></li>
-                        <li><a href="questao9.html">Questão 9</a></li>
+                        <li><a href="#">Questão 8</a></li>
+                        <li class="active"><a href="questao9.html">Questão 9</a></li>
                     </ul>
                 </li>
 
@@ -264,10 +264,28 @@
                         </div>
                     </div>
 
+                    <div class="form-group form-group-lg">
+                        <label for="origemNaoDirecionado" class="col-md-3 control-label">Origem</label>
+
+                        <div class="col-md-1 text-center">
+                            <input type="number" min="0" id="origemNaoDirecionado" class="form-control" value="0">
+                        </div>
+                    </div>
+
+                    <br>
+
+                    <div class="form-group form-group-lg">
+                        <label for="destinoNaoDirecionado" class="col-md-3 control-label">Destino</label>
+
+                        <div class="col-md-1 text-center">
+                            <input type="number" min="0" id="destinoNaoDirecionado" class="form-control" value="0">
+                        </div>
+                    </div>
+
                     <div class="row">
                         <div class="col-md-12">
                             <button type="button" class='btn btn-primary'
-                                    onclick="existeCiclo(grafoNetworkNaoDirecionado, '#mensagemNaoDirecionado')">
+                                    onclick="getCaminhoMaisCurto(grafoNetworkNaoDirecionado, $('#origemNaoDirecionado').val(), $('#destinoNaoDirecionado').val(), '#mensagemNaoDirecionado  ')">
                                 Encontrar caminho mais curto
                             </button>
                         </div>
@@ -275,9 +293,12 @@
 
                     <div class="row">
                         <div class="col-md-12">
-                            <div class="alert alert-success text-center hidden" id="mensagemNaoDirecionado">
+                            <strong>
+                                <div class="alert alert-success text-center hidden" id="mensagemNaoDirecionado">
                                 
-                            </div>
+                                </div>
+                            </strong>
+                            
                         </div>
                     </div>
 
@@ -290,6 +311,141 @@
     </div>
     <br>
     <br>
+
+    <div class="row">
+            <div class="col-lg-8 col-lg-offset-2">
+                <div class="card">
+                    <div class="card-body">
+                        <h2>Procedimento</h2>
+
+                        <br>
+
+                        <ul class="nav nav-pills ct-azure">
+                            <li role="presentation" class="active"><a href="#procedimentoCaminhoMaisCurto" aria-controls="procedimentoCaminhoMaisCurto" role="tab" data-toggle="tab">Caminho Mais Curto</a></li>
+                            <li role="presentation"><a href="#procedimentoBuscaEmLargura" aria-controls="procedimentoBuscaEmLargura" role="tab" data-toggle="tab">Busca em Largura</a></li>
+                        </ul>
+
+                        <br>
+
+                        <div class="panel panel-primary">
+                            <div class="panel-heading">
+                                <h3 class="panel-title"><span>Procedimento</span></h3>
+                            </div>
+                            <div class="panel-body">
+                                <div class="tab-content">
+                                    <div role="tabpanel" class="tab-pane fade in active" id="procedimentoCaminhoMaisCurto">
+
+
+                                        <pre><span class="instance_member_function">GrafoListaAdjacencia</span>.prototype.<span class="instance_member_function">caminhoMaisCurto</span> = <span class="keyword">function</span>(origem, destino) {
+    <span class="keyword">if</span> (<span class="instance_member_variable">this</span>.<span class="instance_member_function">existeVertice</span>(origem) && <span class="instance_member_variable">this</span>.<span class="instance_member_function">existeVertice</span>(destino)) {
+        <span class="keyword">var</span> buscaEmLargura = <span class="instance_member_variable">this</span>.<span class="instance_member_function">buscaEmLargura</span>(origem);
+
+        <span class="keyword">if</span> (origem == destino) {
+            <span class="keyword">return</span> [origem];
+        } <span class="keyword">else if</span> (! buscaEmLargura[destino] || buscaEmLargura[destino].antecessor == -1) {
+            <span class="keyword">return</span> null;
+        } <span class="keyword">else</span> {
+            <span class="keyword">return</span> this.<span class="instance_member_function">caminhoMaisCurto</span>(origem, buscaEmLargura[destino].antecessor).<span class="instance_member_function">concat</span>(destino);
+        }
+    } <span class="keyword">else</span> {
+        <span class="keyword">return</span> null;
+    }
+};</pre>
+
+                                        <button class="btn btn-raised btn-sm" type="button" data-toggle="collapse" data-target="#comentariosMatriz" aria-expanded="false" aria-controls="comentariosMatriz">
+                                            <span class="glyphicon glyphicon-pencil"></span> Comentários
+                                        </button>
+
+                                        <div class="collapse" id="comentariosMatriz">
+                                            <div class="panel" style="margin-top: 10px;">
+                                                <div class="panel-body">
+                                                    A função acima apenas checa se os valores passados como vértice de entrada e vértice de saída são valores válidos
+                                                    e em seguida verifica a existência da aresta no grafo, considerando que qualquer valor número que não seja 0
+                                                    representará a existência de uma aresta.
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                    <div role="tabpanel" class="tab-pane fade" id="procedimentoBuscaEmLargura">
+                                        <pre>GrafoListaAdjacencia.prototype.buscaEmLargura = function(verticeEscolhido) {
+    if (this.existeVertice(verticeEscolhido)) {
+        var grafoBusca = this.iniciarBuscaEmLargura(verticeEscolhido);
+
+        var Q = [grafoBusca[verticeEscolhido]];
+
+        while (Q.length > 0) {
+            var u = Q[0];
+
+            Q = Q.slice(1);
+
+            var adj = this.getVerticesAdjacentes(u.indice);
+
+            for (var i in adj) {
+                var v = grafoBusca[adj[i]];
+
+                if (v.cor == 'BRANCO') {
+                    v.cor = 'CINZA';
+                    v.distancia = u.distancia + 1;
+                    v.antecessor = u.indice;
+                    Q.push(v);
+                }
+            }
+
+            u.cor = 'PRETO';
+        }
+
+        return grafoBusca;
+    } else {
+        console.log("Vértice inválido");
+        return null;
+    }
+};</pre>
+
+                                        <pre>GrafoListaAdjacencia.prototype.iniciarBuscaEmLargura = function(verticeEscolhido) {
+    var grafoBusca = [];
+
+    for (var i = 0; i < this.numVertices; i++) {
+        var vertice = {
+            cor: 'BRANCO',
+            distancia: Infinity,
+            antecessor: -1,
+            indice: i
+        };
+
+        grafoBusca.push(vertice);
+    }
+
+    grafoBusca[verticeEscolhido].cor = 'CINZA';
+    grafoBusca[verticeEscolhido].distancia = 0;
+
+    return grafoBusca;
+};</pre>
+
+                                        <button class="btn btn-raised btn-sm" type="button" data-toggle="collapse" data-target="#comentariosLista" aria-expanded="false" aria-controls="comentariosLista">
+                                            <span class="glyphicon glyphicon-pencil"></span> Comentários
+                                        </button>
+
+                                        <div class="collapse" id="comentariosLista">
+                                            <div class="panel" style="margin-top: 10px;">
+                                                <div class="panel-body">
+                                                    A função da implementação utilizando lista de adjacência é bem semelhante à função da matriz em relação aos passos
+                                                    executados. É verificado primeiramente a existência do vértice de saída e em seguida, analisamos se o vértice de chegada
+                                                    inserido está presente na lista de vértices adjacentes do vértice de saída.
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br>
+        <br>
 </div>
 
 <br>
