@@ -137,14 +137,11 @@
             <div class="container">
                 <h1>6ª Questão</h1>
 
-                <p>A 5ª questão pedia que o grafo G fosse transformado em um grafo completo e as questões 3 e 4 fossem
-                    repetidas com
-                    o novo grafo em questão. Logo, abaixo temos o cálculo do tempo de processamento gasto para encontrar
-                    o conjunto de
-                    vértices adjacentes a cada um dos vértices de H e em seguida, um estudo detalhado acerca dos dados
-                    encontrados no Item 3.
+                <p>A 6ª questão da lista tinha como comando mostrar como funcionava a busca em profundidade para
+                    o dígrafo D, ou seja, informar a ordem de visita dos seus vértices. Além disso, o problema
+                    requisitava
+                    a elaboração de um procedimento computacional que validasse o resultado encontrado.</p>
 
-                </p>
             </div>
         </div>
     </div>
@@ -181,6 +178,34 @@
             <div class="card">
                 <div class="card-body">
                     <h2>Solução</h2>
+
+                    <p>A busca em profundidade partindo do vértice 0 retornará a ordem de visita <strong>0 --> 2 --> 5
+                        --> 6 --> 3 --> 7 -->
+                        9 --> 8 --> 1 --> 4</strong>. Partindo do vértice 0, temos a opção de ir tanto para o vértice 2
+                        quanto para o vértice 3.
+                        Para o nosso caso, escolhemos sempre ir para o vértice de menor índice, neste caso, vértice 2. A
+                        partir
+                        do vértice 2, encontramos o 5, depois o 6, deparando-se então com uma aresta de retorno para 2.
+                    </p>
+
+                    <p>A busca então retorna do 6 para 5, do 5 para o 2, do 2 para o 0, partindo então para o vértice 3.
+                        A partir do vértice 3, temos 2 possibilidades, ir para o vértice 7 ou 8. Seguindo o padrão
+                        descrito acima,
+                        vamos para o vértice 7, em seguida para o 9, que possui uma aresta de retorno para 7. Retornamos
+                        então o caminho da busca,
+                        voltando para o vértice 7, em seguida para o vértice 3. Neste momento, nossa busca se encontra
+                        em
+                        0 --> 2 --> 5 --> 6 --> 3 --> 7 --> 9. Partindo para o vértice 8 a partir do vértice 3, não
+                        encontramos nenhum adjacente de 8
+                        que ainda não tenha sido visitado. A busca então retorna todo seu caminho até voltar para o
+                        vértice 0, tendo seu
+                        término em 16.</p>
+
+                    <p>A busca é então reiniciada a partir do vértice que ainda não foi visitado, isto é, o vértice 1,
+                        que visita o 4, finalizando
+                        então a busca em profundidade do dígrafo da questão. Abaixo, temos o procedimento computacional
+                        para validar o resultado
+                        encontrado, e ainda oferecemos a opção de partir de qualquer vértice presente no dígrafo.</p>
 
                     <div class="form-group form-group-lg">
                         <label for="vertice" class="col-md-2 control-label">Vértice Inicial</label>
@@ -245,7 +270,7 @@
         <div class="col-lg-8 col-lg-offset-2">
             <div class="card">
                 <div class="card-body">
-                    <h2>Execução | Grafo Direcionado</h2>
+                    <h3><span class="glyphicon glyphicon-console"></span> Execução | Grafo Direcionado</h3>
 
                     <br>
 
@@ -280,11 +305,14 @@
                     <div class="row text-center">
                         <div class="col-md-12">
                             <strong>
-                                <div class="alert alert-success text-center hidden" style="margin-bottom: 0;" id='ordemDeVisitaNetwork'></div>
+                                <div class="alert alert-success text-center hidden" style="margin-bottom: 0;"
+                                     id='ordemDeVisitaNetwork'></div>
                             </strong>
 
                             <!-- Button trigger modal -->
-                            <button type="button" id="buttonTabelaDFSDirecionado" class="text-center btn btn-default btn-xs hidden" data-toggle="modal" data-target="#modalGrafoDirecionado">
+                            <button type="button" id="buttonTabelaDFSDirecionado"
+                                    class="text-center btn btn-default btn-xs hidden" data-toggle="modal"
+                                    data-target="#modalGrafoDirecionado">
                                 Verificar tempos de início/fim
                             </button>
                         </div>
@@ -303,7 +331,7 @@
         <div class="col-lg-8 col-lg-offset-2">
             <div class="card">
                 <div class="card-body">
-                    <h2>Execução | Grafo Não-Direcionado</h2>
+                    <h3><span class="glyphicon glyphicon-console"></span> Execução | Grafo Não-Direcionado</h3>
 
                     <br>
                     <br>
@@ -348,9 +376,102 @@
                             </strong>
 
                             <!-- Button trigger modal -->
-                            <button type="button" id="buttonTabelaDFSNaoDirecionado" class="text-center btn btn-default btn-xs hidden" data-toggle="modal" data-target="#modalGrafoNaoDirecionado">
+                            <button type="button" id="buttonTabelaDFSNaoDirecionado"
+                                    class="text-center btn btn-default btn-xs hidden" data-toggle="modal"
+                                    data-target="#modalGrafoNaoDirecionado">
                                 Verificar tempos de início/fim
                             </button>
+                        </div>
+                    </div>
+
+                    <br>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br>
+    <br>
+
+    <!-- Procedimento -->
+    <div class="row">
+        <div class="col-lg-8 col-lg-offset-2">
+            <div class="card">
+                <div class="card-body">
+                    <h3>Procedimento</h3>
+
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <h3 class="panel-title"><span>Métodos Utilizados</span></h3>
+                        </div>
+                        <div class="panel-body">
+                            <div class="tab-content">
+                                <pre><span class="keyword">var</span> <span class="instance_member_function">dfs</span> = <span
+                                        class="keyword">function</span> (graph, verticeInicial, listaVertices) {
+    cor = {}<span class="keyword">;</span>
+    predecessor = {}<span class="keyword">;</span>
+    d = {}<span class="keyword">;</span>
+    f = {}<span class="keyword">;</span>
+
+    <span class="keyword">for</span> (<span class="keyword">var</span> u <span class="keyword">in</span> listaVertices) {
+        cor[listaVertices[u]] = 'BRANCO'<span class="keyword">;</span>
+        predecessor[listaVertices[u]] = <span class="keyword">null</span><span class="keyword">;</span>
+    }
+
+    tempo = 0<span class="keyword">;</span>
+
+    <span class="keyword">for</span> (<span class="keyword">var</span> u <span class="keyword">in</span> listaVertices) {
+        <span class="keyword">if</span> (cor[listaVertices[u]] == 'BRANCO') {
+            <span class="instance_member_function">visitaDFS</span>(listaVertices[u], graph)<span
+                                            class="keyword">;</span>
+        }
+    }
+};</pre>
+
+                                <pre><span class="keyword">var</span> <span
+                                        class="instance_member_function">visitaDFS</span> = <span class="keyword">function</span> (u, graph) {
+    cor[u] = 'CINZA'<span class="keyword">;</span>
+    tempo++<span class="keyword">;</span>
+    d[u] = tempo<span class="keyword">;</span>
+
+    <span class="keyword">var</span> adjacentes = graph.<span
+                                            class="instance_member_function">getVerticesAdjacentes</span>(u)<span
+                                            class="keyword">;</span>
+
+    <span class="keyword">for</span> (<span class="keyword">var</span> i <span class="keyword">in</span> adjacentes) {
+        <span class="keyword">var</span> v = adjacentes[i]<span class="keyword">;</span>
+
+        <span class="keyword">if</span> (cor[v] == 'BRANCO') {
+            predecessor[v] = u<span class="keyword">;</span>
+            <span class="instance_member_function">visitaDFS</span>(v, graph)<span class="keyword">;</span>
+        }
+    }
+
+    cor[u] = 'PRETO'<span class="keyword">;</span>
+    tempo++<span class="keyword">;</span>
+    f[u] = tempo<span class="keyword">;</span>
+};</pre>
+
+
+                                <button class="btn btn-raised btn-sm" type="button" data-toggle="collapse"
+                                        data-target="#comentariosMatriz" aria-expanded="false"
+                                        aria-controls="comentariosMatriz">
+                                    <span class="glyphicon glyphicon-pencil"></span> Comentários
+                                </button>
+
+                                <div class="collapse" id="comentariosMatriz">
+                                    <div class="panel" style="margin-top: 10px;">
+                                        <div class="panel-body">
+                                            O procedimento DFS inicializa todos os vértices presentes no grafo com cor
+                                            branca e predecessor nulo. A partir desta inicialização, para cada vértice não
+                                            visitado do grafo, é chamado o procedimento visitaDFS.
+
+                                            A função visitaDFS coleta os vértices adjacentes do vértice passado como
+                                            parâmetro e visita cada vértice adjacente, caso o mesmo ainda não tenha sido visitado. Por fim, a
+                                            função seta a cor do vértice como visitado e define seu tempo de término.
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
 
@@ -391,7 +512,8 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
                 <h4 class="modal-title">Tabela de tempos de início e fim | Grafo Direcionado</h4>
             </div>
             <div class="modal-body">
@@ -422,7 +544,8 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
                 <h4 class="modal-title">Tabela de tempos de início e fim | Grafo Não-Direcionado</h4>
             </div>
             <div class="modal-body">
