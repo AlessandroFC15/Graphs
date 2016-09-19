@@ -73,7 +73,7 @@ var encontrarSubGrafosBuscaEmProfundidade = function(verticeInicial, graph, list
         subGrafos.push(subGrafoAtual);
 
     return subGrafos;
-}
+};
 
 var imprimirComponentesFortementeConexos = function(componentes, idMensagem) {
     var mensagem = $(idMensagem);
@@ -96,7 +96,7 @@ var imprimirComponentesFortementeConexos = function(componentes, idMensagem) {
     }
 
     mensagem.removeClass('hidden');
-}
+};
 
 var getComponentesFortementeConexos = function(grafo, idMensagem) {
     // Aplicar a busca em profundidade no grafo G para obter os tempos de término para cada vértice u.
@@ -130,6 +130,6 @@ var getComponentesFortementeConexos = function(grafo, idMensagem) {
     var subgrafos = encontrarSubGrafosBuscaEmProfundidade('0', grafoTransposto, ordemVisitaVertices);
 
     imprimirComponentesFortementeConexos(subgrafos, idMensagem);
-}
+};
 
 

@@ -15,24 +15,6 @@ var getTableCell = function (content) {
     return cell;
 };
 
-function getCaminhoMaisCurto(origem, destino) {
-    var retorno = $('#caminhoMaisCurtoResultado');
-
-    var caminhoMaisCurto = grafo.caminhoMaisCurto(origem, destino);
-
-    if (caminhoMaisCurto) {
-        retorno.html("O caminho mais curto de " + origem + ' até ' + destino + ' é ' + caminhoMaisCurto.join(' -> '));
-        retorno.removeClass('alert-danger');
-        retorno.addClass('alert-success');
-    } else {
-        retorno.html("Não existe caminho de " + origem + ' até ' + destino + '.');
-        retorno.removeClass('alert-success');
-        retorno.addClass('alert-danger');
-    }
-
-    retorno.removeClass('hidden');
-}
-
 var imprimirMensagemErro = function (idMensagem, verticeInicial, idButtonTabela) {
     var mensagem = $(idMensagem);
     mensagem.removeClass('hidden');

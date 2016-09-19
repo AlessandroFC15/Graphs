@@ -178,14 +178,18 @@ GrafoListaAdjacencia.prototype.existeCicloHelper = function(vertice, visitados, 
 };
 
 GrafoListaAdjacencia.prototype.caminhoMaisCurto = function(origem, destino) {
-    var buscaEmLargura = this.buscaEmLargura(origem);
+    if (this.existeVertice(origem) && this.existeVertice(destino)) {
+        var buscaEmLargura = this.buscaEmLargura(origem);
 
-    if (origem == destino) {
-        return [origem];
-    } else if (! buscaEmLargura[destino] || buscaEmLargura[destino].antecessor == -1) {
-        return null;
+        if (origem == destino) {
+            return [origem];
+        } else if (! buscaEmLargura[destino] || buscaEmLargura[destino].antecessor == -1) {
+            return null;
+        } else {
+            return this.caminhoMaisCurto(origem, buscaEmLargura[destino].antecessor).concat(destino);
+        }
     } else {
-        return this.caminhoMaisCurto(origem, buscaEmLargura[destino].antecessor).concat(destino);
+        return null;
     }
 };
 
