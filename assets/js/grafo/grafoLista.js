@@ -177,6 +177,72 @@ GrafoListaAdjacencia.prototype.existeCicloHelper = function(vertice, visitados, 
     return false;
 };
 
+GrafoListaAdjacencia.prototype.caminhoMaisCurto = function(origem, destino) {
+    var buscaEmLargura = this.buscaEmLargura(origem);
+
+    if (origem == destino) {
+        return [origem];
+    } else if (! buscaEmLargura[destino] || buscaEmLargura[destino].antecessor == -1) {
+        return null;
+    } else {
+        return this.caminhoMaisCurto(origem, buscaEmLargura[destino].antecessor).concat(destino);
+    }
+};
+
+GrafoListaAdjacencia.prototype.iniciarBuscaEmLargura = function(verticeEscolhido) {
+    var grafoBusca = [];
+
+    for (var i = 0; i < this.numVertices; i++) {
+        var vertice = {
+            cor: 'BRANCO',
+            distancia: Infinity,
+            antecessor: -1,
+            indice: i
+        };
+
+        grafoBusca.push(vertice);
+    }
+
+    grafoBusca[verticeEscolhido].cor = 'CINZA';
+    grafoBusca[verticeEscolhido].distancia = 0;
+
+    return grafoBusca;
+};
+
+GrafoListaAdjacencia.prototype.buscaEmLargura = function(verticeEscolhido) {
+    if (verticeEscolhido >= 0 && verticeEscolhido < this.numVertices) {
+        var grafoBusca = this.iniciarBuscaEmLargura(verticeEscolhido);
+
+        var Q = [grafoBusca[verticeEscolhido]];
+
+        while (Q.length > 0) {
+            var u = Q[0];
+
+            Q = Q.slice(1);
+
+            var adj = this.getVerticesAdjacentes(u.indice);
+
+            for (var i in adj) {
+                var v = grafoBusca[adj[i]];
+
+                if (v.cor == 'BRANCO') {
+                    v.cor = 'CINZA';
+                    v.distancia = u.distancia + 1;
+                    v.antecessor = u.indice;
+                    Q.push(v);
+                }
+            }
+
+            u.cor = 'PRETO';
+        }
+
+        return grafoBusca;
+    } else {
+        console.log("Vértice inválido");
+        return null;
+    }
+};
+
 function getTableRowListaAdjacencia(vertice, adjacentes) {
     var tableData = '<td><strong>' + vertice  +' ----> </strong></td>';
 
