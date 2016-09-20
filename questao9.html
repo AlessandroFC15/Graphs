@@ -137,13 +137,9 @@
             <div class="container">
                 <h1>9ª Questão</h1>
 
-                <p>A 5ª questão pedia que o grafo G fosse transformado em um grafo completo e as questões 3 e 4 fossem
-                    repetidas com
-                    o novo grafo em questão. Logo, abaixo temos o cálculo do tempo de processamento gasto para encontrar
-                    o conjunto de
-                    vértices adjacentes a cada um dos vértices de H e em seguida, um estudo detalhado acerca dos dados
-                    encontrados no Item 3.
-
+                <p>A questão nº 9 da lista pedia a elaboração de um programa computacional que informasse o caminho mais curto
+                    entre 2 vértices dado o dígrafo da questão. O comando pedia o uso de busca em largura para encontrar
+                    o resultado, além de apresentar um log de execução.
                 </p>
             </div>
         </div>
@@ -312,6 +308,7 @@
     <br>
     <br>
 
+    <!--Procedimentos-->
     <div class="row">
             <div class="col-lg-8 col-lg-offset-2">
                 <div class="card">
@@ -359,9 +356,11 @@
                                         <div class="collapse" id="comentariosMatriz">
                                             <div class="panel" style="margin-top: 10px;">
                                                 <div class="panel-body">
-                                                    A função acima apenas checa se os valores passados como vértice de entrada e vértice de saída são valores válidos
-                                                    e em seguida verifica a existência da aresta no grafo, considerando que qualquer valor número que não seja 0
-                                                    representará a existência de uma aresta.
+                                                    Primeiramente, verificamos se os vérticos inseridos como origem e destino realmente existem
+                                                    no grafo. Em seguida, realizamos a busca em largura partindo da origem e temos 3 casos possíveis.
+                                                    Caso a origem seja igual ao destino, retornamos o próprio vértice. Caso a busca em largura não possua
+                                                    o vértice destino ou a busca não alcançou o vértice, retornamos null. Por último, retornamos o caminho mais
+                                                    curto entre origem e o antecessor do destino, concatenado com o destino.
                                                 </div>
                                             </div>
                                         </div>
@@ -369,58 +368,58 @@
                                     </div>
 
                                     <div role="tabpanel" class="tab-pane fade" id="procedimentoBuscaEmLargura">
-                                        <pre>GrafoListaAdjacencia.prototype.buscaEmLargura = function(verticeEscolhido) {
-    if (this.existeVertice(verticeEscolhido)) {
-        var grafoBusca = this.iniciarBuscaEmLargura(verticeEscolhido);
+                                        <pre><span class="instance_member_function">GrafoListaAdjacencia</span>.prototype.<span class="instance_member_function">buscaEmLargura</span> = <span class="keyword">function</span>(verticeEscolhido) {
+    <span class="keyword">if</span> (<span class="instance_member_variable">this</span>.existeVertice(verticeEscolhido)) {
+        <span class="keyword">var</span> grafoBusca = <span class="instance_member_variable">this</span>.<span class="instance_member_function">iniciarBuscaEmLargura</span>(verticeEscolhido);
 
-        var Q = [grafoBusca[verticeEscolhido]];
+        <span class="keyword">var</span> Q = [grafoBusca[verticeEscolhido]];
 
-        while (Q.length > 0) {
-            var u = Q[0];
+        <span class="keyword">while</span> (Q.length > 0) {
+            <span class="keyword">var</span> u = Q[0];
 
-            Q = Q.slice(1);
+            Q = Q.<span class="instance_member_function">slice</span>(1);
 
-            var adj = this.getVerticesAdjacentes(u.indice);
+            <span class="keyword">var</span> adj = <span class="instance_member_variable">this</span>.getVerticesAdjacentes(u.indice);
 
-            for (var i in adj) {
-                var v = grafoBusca[adj[i]];
+            <span class="keyword">for</span> (<span class="keyword">var</span> i in adj) {
+                <span class="keyword">var</span> v = grafoBusca[adj[i]];
 
-                if (v.cor == 'BRANCO') {
+                <span class="keyword">if</span> (v.cor == 'BRANCO') {
                     v.cor = 'CINZA';
                     v.distancia = u.distancia + 1;
                     v.antecessor = u.indice;
-                    Q.push(v);
+                    Q.<span class="instance_member_function">push</span>(v);
                 }
             }
 
             u.cor = 'PRETO';
         }
 
-        return grafoBusca;
-    } else {
+        <span class="keyword">return</span> grafoBusca;
+    } <span class="keyword">else</span> {
         console.log("Vértice inválido");
-        return null;
+        <span class="keyword">return</span> null;
     }
 };</pre>
 
-                                        <pre>GrafoListaAdjacencia.prototype.iniciarBuscaEmLargura = function(verticeEscolhido) {
-    var grafoBusca = [];
+                                        <pre><span class="instance_member_function">GrafoListaAdjacencia</span>.prototype.<span class="instance_member_function">iniciarBuscaEmLargura</span> = <span class="keyword">function</span>(verticeEscolhido) {
+    <span class="keyword">var</span> grafoBusca = [];
 
-    for (var i = 0; i < this.numVertices; i++) {
-        var vertice = {
+    <span class="keyword">for</span> (<span class="keyword">var</span> i = 0; i < <span class="instance_member_variable">this</span>.numVertices; i++) {
+        <span class="keyword">var</span> vertice = {
             cor: 'BRANCO',
             distancia: Infinity,
             antecessor: -1,
             indice: i
         };
 
-        grafoBusca.push(vertice);
+        grafoBusca.<span class="instance_member_function">push</span>(vertice);
     }
 
     grafoBusca[verticeEscolhido].cor = 'CINZA';
     grafoBusca[verticeEscolhido].distancia = 0;
 
-    return grafoBusca;
+    <span class="keyword">return</span> grafoBusca;
 };</pre>
 
                                         <button class="btn btn-raised btn-sm" type="button" data-toggle="collapse" data-target="#comentariosLista" aria-expanded="false" aria-controls="comentariosLista">
@@ -430,9 +429,15 @@
                                         <div class="collapse" id="comentariosLista">
                                             <div class="panel" style="margin-top: 10px;">
                                                 <div class="panel-body">
-                                                    A função da implementação utilizando lista de adjacência é bem semelhante à função da matriz em relação aos passos
-                                                    executados. É verificado primeiramente a existência do vértice de saída e em seguida, analisamos se o vértice de chegada
-                                                    inserido está presente na lista de vértices adjacentes do vértice de saída.
+
+                                                    <p>O método iniciarBuscaEmLargura initializa todos os vértices do grafo com cor branca, distância
+                                                        infinita e antecessor com valor -1. Em seguida, o vértico escolhido para iniciar a busca tem sua
+                                                        cor setada para cinza e distância 0.</p>
+
+                                                    <p>O método principal da busca em largura chama o método para iniciar a busca e em seguida,
+                                                    enquanto a lista Q não for vazia, a busca pega o primeiro elemento, o retira de Q e visita
+                                                    todos os seus vértices adjacentes, caso ainda não tenham sido visitados.</p>
+
                                                 </div>
                                             </div>
                                         </div>
@@ -456,10 +461,10 @@
 
     <div class="row">
         <div class="col-md-4 col-md-offset-4 text-center">
-            <a href="questao5.html" class="btn btn-primary btn-fab" data-toggle="tooltip" data-placement="left"
-               title="5ª Questão"><i class="material-icons">arrow_backward</i></a>
-            <a href="questao7.html" class="btn btn-primary btn-fab" data-toggle="tooltip" data-placement="right"
-               title="7ª Questão"><i class="material-icons">arrow_forward</i></a>
+            <a href="questao8.html" class="btn btn-primary btn-fab" data-toggle="tooltip" data-placement="left"
+               title="8ª Questão"><i class="material-icons">arrow_backward</i></a>
+            <a href="questao10.html" class="btn btn-primary btn-fab" data-toggle="tooltip" data-placement="right"
+               title="10ª Questão"><i class="material-icons">arrow_forward</i></a>
         </div>
     </div>
 
