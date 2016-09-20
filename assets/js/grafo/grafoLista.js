@@ -99,14 +99,17 @@ GrafoListaAdjacencia.prototype.removerArestasDeVertice = function (vertice) {
 
 GrafoListaAdjacencia.prototype.removerAresta = function(verticeSaida, verticeChegada) {
     if (this.lista.hasOwnProperty(verticeSaida) && this.lista.hasOwnProperty(verticeChegada)) {
-        this.lista[verticeSaida] = this.lista[verticeSaida].filter(function (vertice) {
-            return vertice != verticeChegada;
-        });
+        var index = this.lista[verticeSaida].indexOf(parseInt(verticeChegada));
+
+        if (index !== - 1) {
+            this.lista[verticeSaida].splice(index, 1);
+        }
 
         if (this.tipoGrafo == NAO_DIRECIONADO && verticeSaida !== verticeChegada) {
-            this.lista[verticeChegada] = this.lista[verticeChegada].filter(function (vertice) {
-                return vertice != verticeSaida;
-            });
+            var index = this.lista[verticeChegada].indexOf(parseInt(verticeSaida));
+
+            if (index != - 1)
+                this.lista[verticeChegada].splice(index, 1);
         }
     } else {
         console.log('A aresta não existe no grafo!');
@@ -246,6 +249,33 @@ GrafoListaAdjacencia.prototype.buscaEmLargura = function(verticeEscolhido) {
         return null;
     }
 };
+
+GrafoListaAdjacencia.prototype.getGrauVertice = function(vertice) {
+    if (this.existeVertice(vertice)) {
+        if (this.tipoGrafo == NAO_DIRECIONADO) {
+            return this.lista[vertice].length
+        } else {
+            console.log('Não implementado, tá o acabando o tempo, galera!');
+        }
+    } else {
+        console.log('Vértice inválido');
+        return null;
+    }
+}
+
+GrafoListaAdjacencia.prototype.isEleuriano = function() {
+    var listaVertices = this.getListaVertices();
+
+    for (var i in listaVertices) {
+        var grauVertice = this.getGrauVertice(listaVertices[i]);
+
+        if (grauVertice % 2 != 0) {
+            return false;
+        }
+    }
+
+    return true;
+}
 
 function getTableRowListaAdjacencia(vertice, adjacentes) {
     var tableData = '<td><strong>' + vertice  +' ----> </strong></td>';
