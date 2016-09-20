@@ -41,30 +41,6 @@ var criarGrafo = function (nodes, edges, id, grafoRepresentacao, tipoGrafo) {
         manipulation: {
             enabled: true,
             initiallyActive: true,
-            addNode: function (nodeData, callback) {
-                var vertice = grafoRepresentacao.numVertices;
-
-                for (var i = 0; i < 50; i++) {
-                    if (!(i in grafoRepresentacao.lista)) {
-                        vertice = i;
-                        break;
-                    }
-                }
-
-                nodeData.id = vertice;
-                nodeData.label = vertice;
-                grafoRepresentacao.inserirVertice(vertice);
-                callback(nodeData);
-            },
-            addEdge: function (edgeData, callback) {
-                edgeData.id = edgeData.from + 'to' + edgeData.to;
-                grafoRepresentacao.inserirAresta(edgeData.from, edgeData.to);
-                callback(edgeData);
-            },
-            editNode: function (data, callback) {
-                console.log("Quer editar??")
-            },
-            editEdge: true,
             deleteNode: function (data, callback) {
                 grafoRepresentacao.removerVertice(data.nodes[0]);
                 callback(data);
@@ -84,8 +60,36 @@ var criarGrafo = function (nodes, edges, id, grafoRepresentacao, tipoGrafo) {
         edges: edgesOptions
     };
 
+    var network = new vis.Network(container, data, options);
+
+    network.manipulation.options.addNode = function (nodeData, callback) {
+        var vertice = grafoRepresentacao.numVertices;
+
+        for (var i = 0; i < 50; i++) {
+            if (!(i in grafoRepresentacao.lista)) {
+                vertice = i;
+                break;
+            }
+        }
+
+        nodeData.id = vertice;
+        nodeData.label = vertice;
+        grafoRepresentacao.inserirVertice(vertice);
+        callback(nodeData);
+        network.addNodeMode();
+    }
+
+    network.manipulation.options.addEdge = function (edgeData, callback) {
+        
+        edgeData.id = edgeData.from + 'to' + edgeData.to;
+        callback(edgeData);
+        grafoRepresentacao.inserirAresta(edgeData.from, edgeData.to);
+        network.addEdgeMode();
+
+    }
+    
     // initialize your network!
-    return new vis.Network(container, data, options);
+    return network;
 };
 
 var resetGraph = function (grafoVisual, grafoRepresentacao) {
