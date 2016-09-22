@@ -68,7 +68,7 @@ var getRepresentacaoGrafoNaoDirecionadoQuestao6 = function (tipoGrafo) {
     grafo.inserirAresta(3, 0);
 
     return grafo;
-}
+};
 
 var getGrafoQuestao6_9 = function (tipoGrafo) {
     var grafo = new tipoGrafo(10, DIRECIONADO);
@@ -88,7 +88,7 @@ var getGrafoQuestao6_9 = function (tipoGrafo) {
     grafo.inserirAresta(6, 2);
 
     return grafo;
-}
+};
 
 $(function () {
     grafoNetwork = getGrafoQuestao6_9(GrafoListaAdjacencia);

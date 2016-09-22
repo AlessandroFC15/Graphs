@@ -261,7 +261,17 @@ GrafoListaAdjacencia.prototype.getGrauVertice = function(vertice) {
         console.log('Vértice inválido');
         return null;
     }
-}
+};
+
+GrafoListaAdjacencia.prototype.getClone = function() {
+    var grafoClone = new GrafoListaAdjacencia(this.numVertices, this.tipoGrafo)
+
+    for (var i in this.lista) {
+        grafoClone.lista[i] = this.lista[i];
+    }
+
+    return grafoClone;
+};
 
 GrafoListaAdjacencia.prototype.isEleuriano = function() {
     var listaVertices = this.getListaVertices();
@@ -275,7 +285,11 @@ GrafoListaAdjacencia.prototype.isEleuriano = function() {
     }
 
     return true;
-}
+};
+
+GrafoListaAdjacencia.prototype.getCicloEuleriano = function() {
+    var g = this.getClone();
+};
 
 function getTableRowListaAdjacencia(vertice, adjacentes) {
     var tableData = '<td><strong>' + vertice  +' ----> </strong></td>';
