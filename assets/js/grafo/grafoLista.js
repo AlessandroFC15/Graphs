@@ -264,10 +264,11 @@ GrafoListaAdjacencia.prototype.getGrauVertice = function(vertice) {
 };
 
 GrafoListaAdjacencia.prototype.getClone = function() {
-    var grafoClone = new GrafoListaAdjacencia(this.numVertices, this.tipoGrafo)
+    var grafoClone = new GrafoListaAdjacencia(0, this.tipoGrafo);
+    grafoClone.numVertices = this.numVertices;
 
     for (var i in this.lista) {
-        grafoClone.lista[i] = this.lista[i];
+        grafoClone.lista[i] = this.lista[i].slice();
     }
 
     return grafoClone;
@@ -288,8 +289,86 @@ GrafoListaAdjacencia.prototype.isEleuriano = function() {
 };
 
 GrafoListaAdjacencia.prototype.getCicloEuleriano = function() {
+    var vertice = this.getListaVertices()[0];
+
     var g = this.getClone();
+
+    if (vertice !== undefined) {
+        this.printEulerUtil(g, vertice);
+    }
 };
+
+GrafoListaAdjacencia.prototype.printEulerUtil = function(g, vertice) {
+    console.log(g);
+    /*console.log(vertice);
+
+    var adjacentes = g.getVerticesAdjacentes(vertice);
+
+    console.log(adjacentes);
+
+    for (var i = 0; i < adjacentes.length; i++) {
+        var v = adjacentes[i];
+
+        if (g.isValidNextEdge(vertice, v)) {
+            console.log(vertice + '-' + v + ' ');
+            g.removerAresta(vertice, v);
+            console.log(g);
+            return;
+            this.printEulerUtil(g, v);
+        }
+    }*/
+};
+
+GrafoListaAdjacencia.prototype.isValidNextEdge = function(u, v) {
+    var listaVertices = this.getListaVertices();
+
+    // The edge u-v is valid in one of the following two cases:
+
+    var adjacentes = this.getVerticesAdjacentes(u);
+
+    // 1) If v is the only adjacent vertex of u
+    if (adjacentes.length == 1) {
+        return true;
+    }
+
+    // 2) If there are multiple adjacents, then u-v is not a bridge
+    // Do following steps to check if u-v is a bridge
+
+    // 2.a) count of vertices reachable from u
+    var visited = {};
+    for (var i in listaVertices) { visited[listaVertices[i]] = false; }
+
+    var count1 = DFSCount(this, u, visited);
+
+    // 2.b) Remove edge (u, v) and after removing the edge, count
+    // vertices reachable from u
+    this.removerAresta(u, v);
+
+    for (var i in listaVertices) { visited[listaVertices[i]] = false; }
+
+    var count2 = DFSCount(this, u, visited);
+
+    // 2.c) Add the edge back to the graph
+    this.inserirAresta(u, v);
+
+    // 2.d) If count1 is greater, then edge (u, v) is a bridge
+    return (count1 > count2)? false : true;
+};
+
+function DFSCount(grafo, v, visited) {
+    visited[v] = true;
+    var count = 1;
+
+    var adjacentes = grafo.getVerticesAdjacentes(v);
+
+    for (var i = 0; i < adjacentes.length; i++) {
+        if (! visited[adjacentes[i]]) {
+            count += DFSCount(grafo, adjacentes[i], visited);
+        }
+    }
+
+    return count;
+}
 
 function getTableRowListaAdjacencia(vertice, adjacentes) {
     var tableData = '<td><strong>' + vertice  +' ----> </strong></td>';
