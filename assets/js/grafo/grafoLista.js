@@ -6,13 +6,13 @@ function GrafoListaAdjacencia(numVertices, tipoGrafo) {
 
 GrafoListaAdjacencia.prototype.inserirAresta = function(verticeSaida, verticeChegada) {
     if (this.lista[verticeSaida] && this.lista[verticeChegada]) {
-        this.lista[verticeSaida].push(verticeChegada);
+        this.lista[verticeSaida].push(parseInt(verticeChegada));
         this.lista[verticeSaida].sort(function compareNumbers(a, b) {
             return a - b;
         });
 
         if (this.tipoGrafo == NAO_DIRECIONADO && verticeSaida !== verticeChegada) {
-            this.lista[verticeChegada].push(verticeSaida);
+            this.lista[verticeChegada].push(parseInt(verticeSaida));
             this.lista[verticeChegada].sort(function compareNumbers(a, b) {
                 return a - b;
             });
@@ -106,10 +106,11 @@ GrafoListaAdjacencia.prototype.removerAresta = function(verticeSaida, verticeChe
         }
 
         if (this.tipoGrafo == NAO_DIRECIONADO && verticeSaida !== verticeChegada) {
-            var index = this.lista[verticeChegada].indexOf(parseInt(verticeSaida));
+            index = this.lista[verticeChegada].indexOf(parseInt(verticeSaida));
 
-            if (index != - 1)
+            if (index !== - 1) {
                 this.lista[verticeChegada].splice(index, 1);
+            }
         }
     } else {
         console.log('A aresta não existe no grafo!');
@@ -294,29 +295,22 @@ GrafoListaAdjacencia.prototype.getCicloEuleriano = function() {
     var g = this.getClone();
 
     if (vertice !== undefined) {
-        this.printEulerUtil(g, vertice);
+        g.printEulerUtil(vertice);
     }
 };
 
-GrafoListaAdjacencia.prototype.printEulerUtil = function(g, vertice) {
-    console.log(g);
-    /*console.log(vertice);
-
-    var adjacentes = g.getVerticesAdjacentes(vertice);
-
-    console.log(adjacentes);
+GrafoListaAdjacencia.prototype.printEulerUtil = function(vertice) {
+    var adjacentes = this.getVerticesAdjacentes(vertice);
 
     for (var i = 0; i < adjacentes.length; i++) {
         var v = adjacentes[i];
 
-        if (g.isValidNextEdge(vertice, v)) {
+        if (this.isValidNextEdge(vertice, v)) {
             console.log(vertice + '-' + v + ' ');
-            g.removerAresta(vertice, v);
-            console.log(g);
-            return;
-            this.printEulerUtil(g, v);
+            this.removerAresta(parseInt(vertice), v);
+            this.printEulerUtil(v);
         }
-    }*/
+    }
 };
 
 GrafoListaAdjacencia.prototype.isValidNextEdge = function(u, v) {

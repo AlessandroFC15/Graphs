@@ -2,6 +2,24 @@
  * Created by acception on 9/16/16.
  */
 
+var locales = {
+    en: {
+        edit: 'Editar',
+        del: 'Remover selecionado',
+        back: 'Voltar',
+        addNode: 'Adicionar Vértice',
+        addEdge: 'Adicionar Aresta',
+        editNode: 'Editar Vértice',
+        editEdge: 'Editar Aresta',
+        addDescription: 'Clique em um espaço vago para criar um novo vértice.',
+        edgeDescription: 'Clique em um vértice e arraste a aresta até outro vértice',
+        editEdgeDescription: 'Click on the control points and drag them to a node to connect to it.',
+        createEdgeError: 'Cannot link edges to a cluster.',
+        deleteClusterError: 'Clusters cannot be deleted.',
+        editClusterError: 'Clusters cannot be edited.'
+    }
+};
+
 var criarGrafo = function (nodes, edges, id, grafoRepresentacao, tipoGrafo) {
     // create a network
     var container = document.getElementById(id);
