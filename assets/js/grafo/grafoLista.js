@@ -295,7 +295,7 @@ GrafoListaAdjacencia.prototype.getCicloEuleriano = function() {
     var g = this.getClone();
 
     if (vertice !== undefined) {
-        g.printEulerUtil(vertice);
+        return [vertice].concat(g.printEulerUtil(vertice));
     }
 };
 
@@ -306,9 +306,11 @@ GrafoListaAdjacencia.prototype.printEulerUtil = function(vertice) {
         var v = adjacentes[i];
 
         if (this.isValidNextEdge(vertice, v)) {
-            console.log(vertice + '-' + v + ' ');
             this.removerAresta(parseInt(vertice), v);
-            this.printEulerUtil(v);
+
+            var aux = this.printEulerUtil(v);
+
+            return [v].concat(aux !== undefined ? aux : []);
         }
     }
 };
@@ -316,36 +318,31 @@ GrafoListaAdjacencia.prototype.printEulerUtil = function(vertice) {
 GrafoListaAdjacencia.prototype.isValidNextEdge = function(u, v) {
     var listaVertices = this.getListaVertices();
 
-    // The edge u-v is valid in one of the following two cases:
-
     var adjacentes = this.getVerticesAdjacentes(u);
 
-    // 1) If v is the only adjacent vertex of u
+    // 1) A aresta u-v será valida caso v seja o único adjacente de u
     if (adjacentes.length == 1) {
         return true;
     }
 
-    // 2) If there are multiple adjacents, then u-v is not a bridge
-    // Do following steps to check if u-v is a bridge
+    // 2) Caso contrário, faremos o seguinte algoritmo para checar se (u, v) é uma ponte ou não
 
-    // 2.a) count of vertices reachable from u
+    // 2.a) Contar o número de vértices alcançáveis partindo de u
     var visited = {};
     for (var i in listaVertices) { visited[listaVertices[i]] = false; }
-
     var count1 = DFSCount(this, u, visited);
 
-    // 2.b) Remove edge (u, v) and after removing the edge, count
-    // vertices reachable from u
+    // 2.b) Remover a aresta (u, v) and após a remoção, contar o número de vértices alcançáveis
+    // novamento
     this.removerAresta(u, v);
 
     for (var i in listaVertices) { visited[listaVertices[i]] = false; }
-
     var count2 = DFSCount(this, u, visited);
 
-    // 2.c) Add the edge back to the graph
+    // 2.c) Adicionar a resta de volta
     this.inserirAresta(u, v);
 
-    // 2.d) If count1 is greater, then edge (u, v) is a bridge
+    // 2.d) Caso a variável count1 seja maior do que a count2, então a aresta (u, v) é uma ponte.
     return (count1 > count2)? false : true;
 };
 

@@ -1,34 +1,48 @@
 var networkNaoDirecionado, grafoNetworkNaoDirecionado;
 
-var criarGrafoNaoDirecionadoQuestao6 = function (id, representacao) {
+var criarGrafoNaoDirecionadoQuestao10 = function (id, representacao) {
     // create an array with nodes
     var nodes = new vis.DataSet([
-            {id: 0, label: '0', x: 0, y: 0, physics: false},
-            {id: 1, label: '1', x: 200, y: 0, physics: false},
-            {id: 2, label: '2', x: 200, y: 150, physics: false},
-            {id: 3, label: '3', x: 0, y: 150, physics: false},
+            {id: 1, label: '1', x: -200, y: 0, physics: false},
+            {id: 2, label: '2', x: 0, y: 0, physics: false},
+            {id: 3, label: '3', x: 200, y: 0, physics: false},
+            {id: 4, label: '4', x: -300, y: 200, physics: false},
+            {id: 5, label: '5', x: -100, y: 200, physics: false},
+            {id: 6, label: '6', x: 100, y: 200, physics: false},
+            {id: 7, label: '7', x: 300, y: 200, physics: false},
         ]
     );
 
     // create an array with edges
     var edges = new vis.DataSet([
-        {from: 0, to: 1, id: '0to1'},
-        {from: 1, to: 2, id: '1to2'},
-        {from: 2, to: 3, id: '2to3'},
-        {from: 3, to: 0, id: '3to0'},
-
+        {from: 1, to: 4, id: '1to4'},
+        {from: 1, to: 5, id: '1to5'},
+        {from: 4, to: 5, id: '4to5'},
+        {from: 2, to: 5, id: '2to5'},
+        {from: 2, to: 6, id: '2to6'},
+        {from: 5, to: 6, id: '5to6'},
+        {from: 3, to: 6, id: '3to6'},
+        {from: 3, to: 7, id: '3to7'},
+        {from: 6, to: 7, id: '6to7'}
     ]);
 
     return criarGrafo(nodes, edges, id, representacao, NAO_DIRECIONADO);
 };
 
-var getRepresentacaoGrafoNaoDirecionadoQuestao6 = function (tipoGrafo) {
-    var grafo = new tipoGrafo(4, NAO_DIRECIONADO);
+var getRepresentacaoGrafoNaoDirecionadoQuestao10 = function (tipoGrafo) {
+    var grafo = new tipoGrafo(8, NAO_DIRECIONADO);
 
-    grafo.inserirAresta(0, 1);
-    grafo.inserirAresta(1, 2);
-    grafo.inserirAresta(2, 3);
-    grafo.inserirAresta(3, 0);
+    grafo.removerVertice(0);
+
+    grafo.inserirAresta(1, 4);
+    grafo.inserirAresta(1, 5);
+    grafo.inserirAresta(4, 5);
+    grafo.inserirAresta(2, 5);
+    grafo.inserirAresta(2, 6);
+    grafo.inserirAresta(5, 6);
+    grafo.inserirAresta(3, 6);
+    grafo.inserirAresta(3, 7);
+    grafo.inserirAresta(6, 7);
 
     return grafo;
 };
@@ -37,8 +51,13 @@ var isEleurian = function (grafo, idMensagem) {
     var mensagem = $(idMensagem);
 
     if (grafo.isEleuriano()) {
-        mensagem.html('O grafo inserido é euleriano.');
+        var html = 'O grafo inserido é euleriano.';
+
         mensagem.removeClass('alert-danger').addClass('alert-success');
+
+        html += '<p>Ciclo Euleriano: ' + grafo.getCicloEuleriano().join(' -> ') + '</p>';
+
+        mensagem.html(html);
     } else {
         mensagem.html('O grafo inserido NÃO é euleriano.');
         mensagem.removeClass('alert-success').addClass('alert-danger');
@@ -49,6 +68,6 @@ var isEleurian = function (grafo, idMensagem) {
 };
 
 $(function () {
-    grafoNetworkNaoDirecionado = getRepresentacaoGrafoNaoDirecionadoQuestao6(GrafoListaAdjacencia);
-    networkNaoDirecionado = criarGrafoNaoDirecionadoQuestao6('grafoVisualNaoDirecionado', grafoNetworkNaoDirecionado);
+    grafoNetworkNaoDirecionado = getRepresentacaoGrafoNaoDirecionadoQuestao10(GrafoListaAdjacencia);
+    networkNaoDirecionado = criarGrafoNaoDirecionadoQuestao10('grafoVisualNaoDirecionado', grafoNetworkNaoDirecionado);
 });
