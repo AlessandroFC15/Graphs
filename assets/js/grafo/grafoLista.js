@@ -346,6 +346,69 @@ GrafoListaAdjacencia.prototype.isValidNextEdge = function(u, v) {
     return (count1 > count2)? false : true;
 };
 
+GrafoListaAdjacencia.prototype.encontrarArticulacoes = function() {
+    var visited = {}, disc = {}, low = {}, parent = {}, ap = {};
+    var tempo = 0;
+
+    for (var i in this.lista) {
+        parent[i] = null;
+        visited[i] = false;
+        ap[i] = false;
+    }
+
+    for (var i in this.lista) {
+        if (visited[i] === false) {
+            this.encontrarArticulacoesUtil(i, visited, disc, low, parent, ap, tempo);
+        }
+    }
+
+    var pontosDeArticulacao = [];
+
+    for (var i in this.lista) {
+        if (ap[i] === true) {
+            pontosDeArticulacao.push(i);
+        }
+    }
+
+    return pontosDeArticulacao;
+};
+
+GrafoListaAdjacencia.prototype.encontrarArticulacoesUtil = function(u, visited, disc, low, parent, ap, tempo) {
+    var children = 0; // Número de filhos na árvore DFS
+
+    visited[u] = true; // Vértice atual como visitado
+
+    disc[u] = low[u] = ++tempo; // Inicializando tempo de descoberta
+
+    var adjacentes = this.getVerticesAdjacentes(u);
+
+    for (var i = 0; i < adjacentes.length; i++) {
+        var v = adjacentes[i];
+
+        // Caso v não tenha sido visitado, marcar como filho de u na árvore
+        if (! visited[v]) {
+            children++;
+            parent[v] = u;
+            this.encontrarArticulacoesUtil(v, visited, disc, low, parent, ap, tempo);
+
+            // Checar se a subárvore com raiz em v possui conexão a um dos antecessores de u
+            low[u]  = Math.min(parseInt(low[u]), parseInt(low[v]));
+
+            // U é uma articulação em um dos dois casos abaixo
+
+            // 1 => U é raiz da árvore DFS and possui 2 ou mais filhos.
+            if (parent[u] === null && children > 1)
+                ap[u] = true;
+
+            // 2 => U não é raiz e o valor 'low' de um dos seus filhos é maior do que o tempo de descoberta de u.
+            if (parent[u] !== null && low[v] >= disc[u])
+                ap[u] = true;
+        } else if (v != parent[u]) {
+            low[u] = Math.min(parseInt(low[u]), parseInt(disc[v]));
+        }
+    }
+};
+
 function DFSCount(grafo, v, visited) {
     visited[v] = true;
     var count = 1;
