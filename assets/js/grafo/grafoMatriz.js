@@ -186,7 +186,7 @@ function formatarDados(d, antecessor, vertice) {
         var v = {
             distancia: d[i],
             antecessor: antecessor[i],
-            caminho: this.getCaminho(vertice, i, antecessor)
+            // caminho: this.getCaminho(vertice, i, antecessor)
         };
 
         dados[conversao[i]] = v;

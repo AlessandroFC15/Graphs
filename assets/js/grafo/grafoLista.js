@@ -409,6 +409,53 @@ GrafoListaAdjacencia.prototype.encontrarArticulacoesUtil = function(u, visited, 
     }
 };
 
+GrafoListaAdjacencia.prototype.caminhoMinimoDijkstra = function (vertice) {
+    var d = [];
+    var antecessor = [];
+
+    for (var i = 0; i < this.numVertices; i++) {
+        d[i] = Infinity;
+        antecessor[i] = -1;
+    }
+
+    d[vertice] = 0;
+
+    var s = [];
+
+    var q = range(0, this.numVertices - 1);
+
+    while (q.length > 0) {
+        var u = extrairMinimo(q, d);
+
+        removeItem(q, u);
+
+        s.push(u);
+
+        var adj = this.getVerticesAdjacentes(u);
+
+        for (var i in adj) {
+            var v = adj[i];
+
+            if (d[v] > d[u] + this.matriz[u][v]) {
+                d[v] = d[u] + this.matriz[u][v];
+                antecessor[v] = u;
+            }
+        }
+    }
+    
+    return formatarDados(d, antecessor, vertice);
+};
+
+function getCaminho(origem, destino, antecessor) {
+    if (origem == destino) {
+        return [origem];
+    } else if (antecessor[destino] == -1){
+        return [];
+    } else {
+        return this.getCaminho(origem, antecessor[destino], antecessor).concat(destino);
+    }
+}
+
 function DFSCount(grafo, v, visited) {
     visited[v] = true;
     var count = 1;
@@ -443,3 +490,63 @@ function initializarLista(numVertices) {
     return lista;
 }
 
+function formatarDados(d, antecessor, vertice) {
+    var dados = {};
+    
+    for (var i = 0; i < d.length; i++) {
+        var v = {
+            distancia: d[i],
+            antecessor: antecessor[i],
+            caminho: this.getCaminho(vertice, i, antecessor)
+        };
+
+        dados[conversao[i]] = v;
+    }
+    
+    return dados;
+}
+
+function extrairMinimo(q, d) {
+    return q.reduce(function (a, b){
+        if (d[b] < d[a])
+            return b;
+        else
+            return a;
+    });
+}
+
+// Helpers
+
+function range(start, end, step) {
+    if (step == undefined)
+        if (start <= end)
+            step = 1;
+        else
+            step = -1;
+
+    var range = [];
+
+    if (step > 0) {
+        for (var i = start; i <= end; i++)
+            range.push(i);
+    } else if (step < 0) {
+        for (var i = start; i >= end; i += step)
+            range.push(i);
+    }
+
+    return range;
+}
+
+function remove (array , index ) {
+    return array . slice (0, index )
+        . concat ( array . slice ( index + 1));
+}
+
+function removeItem(array, element) {
+    var position = array.indexOf(element);
+
+    if (position != -1) {
+        array.splice(position, 1);
+    }
+
+}
