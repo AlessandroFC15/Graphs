@@ -69,7 +69,7 @@ var conversao = {
     2: 'v',
     3: 'x',
     4: 'y'
-}
+};
 
 var caminhoMinimoDijkstra = function() {
     var dados = grafoNetworkNaoDirecionado.caminhoMinimoDijkstra(0);

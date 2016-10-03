@@ -68,7 +68,7 @@ var getRepresentacaoGrafoNaoDirecionadoQuestao14 = function (tipoGrafo) {
 };
 
 var desenharArvore = function(arvore, network) {
-    var edges = []
+    var edges = [];
 
     var arestas = arvore.getArestas();
 
@@ -81,7 +81,7 @@ var desenharArvore = function(arvore, network) {
 
     console.log(edges);
 
-    var validEdges = []
+    var validEdges = [];
 
     for (var i = 0; i < edges.length; i++) {
         try {
@@ -94,7 +94,7 @@ var desenharArvore = function(arvore, network) {
 
     network.selectEdges(validEdges);
 
-}
+};
 
 var encontrarAGMPrim = function(grafo) {
     var arvore = grafo.encontrarAGMPrim(0);

@@ -1,0 +1,388 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <link rel="apple-touch-icon" sizes="76x76" href="assets/img/apple-icon.png">
+    <link rel="icon" type="image/png" href="assets/img/favicon.png">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <title>Lista de Grafos</title>
+
+    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport'/>
+    <meta name="viewport" content="width=device-width"/>
+
+    <!-- Material Design fonts -->
+    <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Roboto:300,400,500,700">
+    <!--<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/icon?family=Material+Icons">-->
+    <link rel="stylesheet" type="text/css" href="assets/fonts/material-icons/material-icons.css">
+
+    <!-- Bootstrap core CSS -->
+    <!--<link href="assets/css/gaia.css" rel="stylesheet">-->
+    <link href="assets/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <!--<link href="assets/css/gsdk.css" rel="stylesheet" />-->
+    <!--<link href="assets/css/demo.css" rel="stylesheet" />-->
+
+    <!-- Bootstrap Material Design -->
+    <link rel="stylesheet" type="text/css" href="assets/css/bootstrap-material-design.min.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/ripples.min.css">
+
+    <!--     Font Awesome     -->
+    <link href="bootstrap3/css/font-awesome.css" rel="stylesheet">
+    <link href='http://fonts.googleapis.com/css?family=Grand+Hotel' rel='stylesheet' type='text/css'>
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.11.0/css/bootstrap-select.min.css">
+
+    <link rel="stylesheet" href="assets/css/custom/styleForCodeSnippets.css">
+
+    <style>
+        body {
+            padding-top: 40px;
+            padding-bottom: 20px;
+        }
+
+        .dark-label {
+            color: #6D6D6D !important;
+        }
+    </style>
+
+    <!-- Network library -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vis/4.16.1/vis.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/vis/4.16.1/vis.min.css" rel="stylesheet" type="text/css"/>
+
+    <style type="text/css">
+        #mynetwork {
+            height: 400px;
+            border: 1px solid lightgray;
+        }
+    </style>
+
+</head>
+
+<body>
+<nav class="navbar navbar-primary navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#collapseExample"
+                    aria-expanded="false" aria-controls="collapseExample">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="template.html">Lista de Grafos</a>
+        </div>
+
+        <div id="collapseExample" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="template.html">Home</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                       aria-expanded="false">Questões 1-5 <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="questao1.html">Questão 1</a></li>
+                        <li><a href="questao2.html">Questão 2</a></li>
+                        <li><a href="questao3.html">Questão 3</a></li>
+                        <li><a href="questao4.html">Questão 4</a></li>
+                        <li><a href="#">Questão 5</a></li>
+                    </ul>
+                </li>
+
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                       aria-expanded="false">Questões 6-9 <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">Questão 6</a></li>
+                        <li><a href="#">Questão 7</a></li>
+                        <li><a href="#">Questão 8</a></li>
+                        <li><a href="#">Questão 9</a></li>
+                    </ul>
+                </li>
+
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                       aria-expanded="false">Questões 10-11 <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">Questão 10</a></li>
+                        <li><a href="#">Questão 11</a></li>
+                    </ul>
+                </li>
+
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                       aria-expanded="false">Questões 12-14 <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">Questão 12</a></li>
+                        <li><a href="#">Questão 13</a></li>
+                        <li><a href="#">Questão 14</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<br>
+
+<!--Jumbotron header página-->
+<div class="card" style="
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    background-color: #636363;">
+    <div class="container" style="background-color: #636363;">
+        <!-- Main jumbotron for a primary marketing message or call to action -->
+        <div class="jumbotron" style="background-color: #636363; -webkit-box-shadow: none;
+    box-shadow: none; color: whitesmoke">
+            <div class="container">
+                <h1>2ª Lista de Exercício de Grafos</h1>
+
+                <h3><strong>Grafo Ponderado</strong></h3>
+
+                <p>Soluções para as questões presentes na 2ª lista de exercícios da disciplina de Grafos
+                    ministrada na Universidade Federal do Pará (UFPA). Este site foi feito apenas com intuito de
+                    unir o aprendizado da disciplina com habilidades front-end. As execuções a seguir aceitam grafos
+                    ponderados tanto direcionado como não-direcionados.</p>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--Content-->
+<div class="container" style="margin-top: -30px; ">
+
+    <!-- Execução | Grafo Direcionado-->
+    <div class="row">
+        <div class="col-lg-8 col-lg-offset-2">
+            <div class="card">
+                <div class="card-body">
+                    <h3><span class="glyphicon glyphicon-console"></span> Execução | Grafo Direcionado</h3>
+
+                    <br>
+
+                    <ul class="nav nav-pills ct-azure">
+                        <li role="presentation" class="active"><a href="#djistrka" aria-controls="existeAresta" role="tab" data-toggle="tab">Dijkstra</a></li>
+                        <li role="presentation"><a href="#bf" aria-controls="verticesAdjacentes" role="tab" data-toggle="tab">Bellman-Ford</a></li>
+                        <li role="presentation"><a href="#prim" aria-controls="verticesAdjacentes" role="tab" data-toggle="tab">Prim</a></li>
+                    </ul>
+
+
+                    <br>
+
+
+                    <div class="row">
+                        <div class="col-md-10 col-md-offset-1">
+                            <div id="mynetwork"></div>
+
+                            <button class="btn btn-default btn-xs" style="float: right" type="button"
+                                    onclick="resetGraph(network, grafoNetwork)">Resetar Grafo
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="tab-content">
+                        <div role="tabpanel" class="tab-pane fade in active" id="djistrka">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <button type="button" class='btn btn-primary'
+                                            onclick="caminhoMinimoDijkstra(grafoNetwork, '#mensagemDirecionadoDIJ')">
+                                        Encontrar menor caminho (Dijkstra)
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <strong>
+                                        <div class="alert alert-success text-center hidden" id="mensagemDirecionadoDIJ">
+
+                                        </div>
+                                    </strong>
+
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div role="tabpanel" class="tab-pane fade in" id="bf">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <button type="button" class='btn btn-primary'
+                                            onclick="caminhoMinimoBF(grafoNetwork, '#mensagemDirecionadoBF')">
+                                        Encontrar menor caminho (Bellman-Ford)
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <strong>
+                                        <div class="alert alert-success text-center hidden" id="mensagemDirecionadoBF">
+
+                                        </div>
+                                    </strong>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div role="tabpanel" class="tab-pane fade in" id="prim">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <button type="button" class='btn btn-primary'
+                                            onclick="encontrarAGMPrim(grafoNetwork, network)">
+                                        Encontrar AGM
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <br>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br>
+    <br>
+
+    <!-- Execução | Grafo Não-Direcionado-->
+    <div class="row">
+        <div class="col-lg-8 col-lg-offset-2">
+            <div class="card">
+                <div class="card-body">
+                    <h3><span class="glyphicon glyphicon-console"></span> Execução | Grafo Não-Direcionado</h3>
+
+                    <br>
+
+                    <ul class="nav nav-pills ct-azure">
+                        <li role="presentation"><a href="#djistrkaND" aria-controls="existeAresta" role="tab" data-toggle="tab">Dijkstra</a></li>
+                        <li role="presentation"><a href="#bfND" aria-controls="verticesAdjacentes" role="tab" data-toggle="tab">Bellman-Ford</a></li>
+                        <li role="presentation" class="active"><a href="#primND" aria-controls="verticesAdjacentes" role="tab" data-toggle="tab">Prim</a></li>
+                    </ul>
+
+                    <br>
+                    <br>
+
+                    <div class="row">
+                        <div class="col-md-10 col-md-offset-1">
+                            <div id="grafoVisualNaoDirecionado"
+                                 style="border: 1px solid lightgray; height: 400px!important"></div>
+
+                            <button class="btn btn-default btn-xs" style="float: right" type="button"
+                                    onclick="resetGraph(networkNaoDirecionado, grafoNetworkNaoDirecionado)">Resetar
+                                Grafo
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="tab-content">
+                        <div role="tabpanel" class="tab-pane fade in" id="djistrkaND">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <button type="button" class='btn btn-primary'
+                                            onclick="caminhoMinimoDijkstra(grafoNetworkNaoDirecionado, '#mensagemNDDIJ')">
+                                        Encontrar menor caminho (Dijkstra)
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <strong>
+                                        <div class="alert alert-success text-center hidden" id="mensagemNDDIJ">
+
+                                        </div>
+                                    </strong>
+
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div role="tabpanel" class="tab-pane fade in" id="bfND">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <button type="button" class='btn btn-primary'
+                                            onclick="caminhoMinimoBF(grafoNetworkNaoDirecionado, '#mensagemNDBF')">
+                                        Encontrar menor caminho (Bellman-Ford)
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <strong>
+                                        <div class="alert alert-success text-center hidden" id="mensagemNDBF">
+
+                                        </div>
+                                    </strong>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div role="tabpanel" class="tab-pane fade in active" id="primND">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <button type="button" class='btn btn-primary'
+                                            onclick="encontrarAGMPrim(grafoNetworkNaoDirecionado, networkNaoDirecionado)">
+                                        Encontrar AGM
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br>
+    <br>
+</div>
+
+<br>
+
+<!--Navigation and footer-->
+<div class="container">
+    <br>
+
+    <hr>
+
+    <footer>
+        <p>&copy; MysticAlex 2016</p>
+    </footer>
+</div>
+</body>
+
+<script src="jquery/jquery-1.10.2.js" type="text/javascript"></script>
+<script src="assets/js/jquery-ui-1.10.4.custom.min.js" type="text/javascript"></script>
+
+<script src="assets/js/bootstrap.min.js" type="text/javascript"></script>
+<script src="assets/js/material-design/material.min.js"></script>
+<script src="assets/js/material-design/ripples.min.js"></script>
+
+<script src="assets/js/grafoNetwork/grafoNetwork.js"></script>
+
+<script src="assets/js/grafo/helpers.js"></script>
+<script src="assets/js/grafo/mainGrafo.js"></script>
+<script src="assets/js/grafo/grafoMatriz.js"></script>
+<script src="assets/js/grafo/grafoLista.js"></script>
+<script src="assets/js/grafo/grafoListaWeight.js"></script>
+<script src="assets/js/grafo/sandbox.js"></script>
+<script src="assets/js/grafo/buscaEmProfundidade.js"></script>
+<script src="assets/js/grafo/mainWeighted.js"></script>
+<script src="assets/js/Chart.bundle.js"></script>
+
+<script>
+    $(function () {
+        $.material.init();
+        $('[data-toggle="tooltip"]').tooltip();
+    });
+
+
+</script>
+</html>
