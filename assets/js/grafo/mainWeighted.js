@@ -203,7 +203,7 @@ var desenharArvore = function(arvore, network) {
 
 $(function () {
     grafoNetwork = getRepresentacaoGrafoDirecionadoQuestao12(GrafoListaAdjacenciaComPeso);
-    network = criarGrafoDirecionadoQuestao12('mynetwork', grafoNetworkNaoDirecionado);
+    network = criarGrafoDirecionadoQuestao12('mynetwork', grafoNetwork);
 
     grafoNetworkNaoDirecionado = getRepresentacaoGrafoNaoDirecionadoQuestao14(GrafoListaAdjacenciaComPeso);
     networkNaoDirecionado = criarGrafoNaoDirecionadoQuestao14('grafoVisualNaoDirecionado', grafoNetworkNaoDirecionado);
