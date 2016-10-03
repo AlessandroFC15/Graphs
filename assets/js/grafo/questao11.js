@@ -66,6 +66,6 @@ var encontrarPontosDeArticulacao = function (grafo, idMensagem) {
 };
 
 $(function () {
-    grafoNetworkNaoDirecionado = getRepresentacaoGrafoNaoDirecionadoQuestao10(GrafoListaAdjacencia);
+    grafoNetworkNaoDirecionado = getRepresentacaoGrafoNaoDirecionadoQuestao10(GrafoListaAdjacenciaComPeso);
     networkNaoDirecionado = criarGrafoNaoDirecionadoQuestao10('grafoVisualNaoDirecionado', grafoNetworkNaoDirecionado);
 });

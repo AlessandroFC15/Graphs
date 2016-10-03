@@ -14,5 +14,5 @@ var existeCiclo = function(grafo, idMensagem) {
     }
 
     mensagem.removeClass('hidden');
-}
+};
 
