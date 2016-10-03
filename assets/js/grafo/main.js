@@ -338,6 +338,7 @@ var getComponentesFortementeConexos = function(grafo, idMensagem) {
 };
 
 /*EXISTE CICLO?*/
+
 var existeCiclo = function(grafo, idMensagem) {
     var mensagem = $(idMensagem);
 
@@ -388,6 +389,48 @@ var getCaminhoMaisCurto = function(grafo, origem, destino, idMensagem) {
     }
 
     retorno.removeClass('hidden');
+};
+
+/*EULERIANO*/
+
+var isEleurian = function (grafo, idMensagem) {
+    var mensagem = $(idMensagem);
+
+    if (grafo.isEleuriano()) {
+        var html = 'O grafo inserido é euleriano.';
+
+        mensagem.removeClass('alert-danger').addClass('alert-success');
+
+        html += '<p>Ciclo Euleriano: ' + grafo.getCicloEuleriano().join(' -> ') + '</p>';
+
+        mensagem.html(html);
+    } else {
+        mensagem.html('O grafo inserido NÃO é euleriano.');
+        mensagem.removeClass('alert-success').addClass('alert-danger');
+    }
+
+    mensagem.removeClass('hidden');
+
+};
+
+/*PONTOS DE ARTICULAÇÃO*/
+
+var encontrarPontosDeArticulacao = function (grafo, network, idMensagem) {
+    var mensagem = $(idMensagem);
+
+    var pontosDeArticulacao = grafo.encontrarArticulacoes();
+
+    if (pontosDeArticulacao.length > 0) {
+        mensagem.removeClass('alert-danger').addClass('alert-success');
+        mensagem.html('Pontos de Articulação: ' + pontosDeArticulacao.join(', '));
+        network.selectNodes(pontosDeArticulacao, [false]);
+    } else {
+        mensagem.html('Não existem pontos de articulação no grafo acima.');
+        mensagem.removeClass('alert-success').addClass('alert-danger');
+    }
+
+    mensagem.removeClass('hidden');
+
 };
 
 $(function () {

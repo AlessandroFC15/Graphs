@@ -368,7 +368,25 @@
                         </div>
 
                         <div role="tabpanel" class="tab-pane fade in" id="articulacao">
-                            articulacao
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <button type="button" class='btn btn-primary'
+                                            onclick="encontrarPontosDeArticulacao(grafoNetwork, network, '#mensagemArticulacaoD')">
+                                        Encontrar pontos de articulação
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <strong>
+                                        <div class="alert alert-success text-center hidden" id="mensagemArticulacaoD">
+
+                                        </div>
+                                    </strong>
+
+                                </div>
+                            </div>
                         </div>
                     </div>
 
@@ -396,6 +414,7 @@
                         <li role="presentation"><a href="#componentesFortementeConexosND" aria-controls="componentesFortementeConexos" role="tab" data-toggle="tab">Componentes Fortemente Conexos</a></li>
                         <li role="presentation"><a href="#caminhoMaisCurtoND" aria-controls="caminhoMaisCurto" role="tab" data-toggle="tab">Caminho Mais Curto</a></li>
                         <li role="presentation"><a href="#euleriano" aria-controls="euleriano" role="tab" data-toggle="tab">Euleriano?</a></li>
+                        <li role="presentation"><a href="#articulacaoND" aria-controls="articulacaoND" role="tab" data-toggle="tab">Articulação</a></li>
                     </ul>
 
                     <br>
@@ -415,24 +434,24 @@
 
                     <div class="tab-content">
                         <div role="tabpanel" class="tab-pane fade in active" id="existeArestaND">
-                            <form class="form-group" onsubmit="existeAresta(grafoNetwork, network, '#verticeSaidaDirecionado',
-                            '#verticeEntradaDirecionado', '#mensagemArestaDirecionado'); return false;">
+                            <form class="form-group" onsubmit="existeAresta(grafoNetworkNaoDirecionado, networkNaoDirecionado, '#verticeSaidaND',
+                            '#verticeEntradaND', '#mensagemArestaND'); return false;">
 
                                 <div class="form-group form-group-lg">
-                                    <label for="verticeSaidaDirecionado" class="col-md-3 control-label">Vértice de Saída</label>
+                                    <label for="verticeSaidaND" class="col-md-3 control-label">Vértice de Saída</label>
 
                                     <div class="col-md-1 text-center">
-                                        <input type="number" min="0" id="verticeSaidaDirecionado" class="form-control">
+                                        <input type="number" min="0" id="verticeSaidaND" class="form-control">
                                     </div>
                                 </div>
 
                                 <br>
 
                                 <div class="form-group form-group-lg">
-                                    <label for="verticeEntradaDirecionado" class="col-md-3 control-label">Vértice de Entrada</label>
+                                    <label for="verticeEntradaND" class="col-md-3 control-label">Vértice de Entrada</label>
 
                                     <div class="col-md-1 text-center">
-                                        <input type="number" min="0" id="verticeEntradaDirecionado" class="form-control">
+                                        <input type="number" min="0" id="verticeEntradaND" class="form-control">
                                     </div>
                                 </div>
 
@@ -443,7 +462,6 @@
                                 <div class="row">
                                     <div class="col-md-12">
                                         <button type="submit" class="btn btn-primary">Existe Aresta?</button>
-
                                     </div>
                                 </div>
 
@@ -452,7 +470,7 @@
 
                             <div class="row">
                                 <div class="col-md-12">
-                                    <div class="alert hidden text-center" id="mensagemArestaDirecionado"></div>
+                                    <div class="alert hidden text-center" id="mensagemArestaND"></div>
                                 </div>
                             </div>
                         </div>
@@ -569,6 +587,50 @@
                                     <strong>
 
                                         <div class="alert alert-success text-center hidden" id="mensagemCaminhoCurtoND">
+
+                                        </div>
+                                    </strong>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div role="tabpanel" class="tab-pane fade in" id="euleriano">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <button type="button" class='btn btn-primary'
+                                            onclick="isEleurian(grafoNetworkNaoDirecionado, '#mensagemEuleriano')">
+                                        Grafo Euleriano?
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <strong>
+                                        <div class="alert alert-success text-center hidden" id="mensagemEuleriano">
+
+                                        </div>
+                                    </strong>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div role="tabpanel" class="tab-pane fade in" id="articulacaoND">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <button type="button" class='btn btn-primary'
+                                            onclick="encontrarPontosDeArticulacao(grafoNetworkNaoDirecionado, networkNaoDirecionado, '#mensagemArticulacaoND')">
+                                        Encontrar pontos de articulação
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <strong>
+                                        <div class="alert alert-success text-center hidden" id="mensagemArticulacaoND">
 
                                         </div>
                                     </strong>
