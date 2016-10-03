@@ -138,7 +138,7 @@ GrafoListaAdjacenciaComPeso.prototype.caminhoMinimoBF = function (vertice) {
         if (d[v] > d[u] + this.lista[u][v]) {
             console.log(u + '|' + v);
             console.log('Graph contains a negative-weight cycle');
-            return;
+            return false;
         }
     }
 
